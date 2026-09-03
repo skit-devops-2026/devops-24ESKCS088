@@ -27,6 +27,7 @@ jobs:
   # ---------------------------------------------------------------------------
   build-and-test:
     name: Build and test
+    needs: hygiene
     runs-on: ubuntu-latest
 
     steps:
