@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+
+  # ---------------------------------------------------------------------------
+  # Given to you. Do not delete this job.
+  # ---------------------------------------------------------------------------
+  hygiene:
+    name: Repository hygiene
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run hygiene checks
+        run: bash scripts/hygiene.sh
+
+
+  # ---------------------------------------------------------------------------
+  # M3 — YOUR WORK STARTS HERE.
+  # ---------------------------------------------------------------------------
+  build-and-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Run tests
+        run: make test
+
+      - name: Build project
+        run: make build
+
+
+  # ---------------------------------------------------------------------------
+  # M4 — Containerization.
+  # ---------------------------------------------------------------------------
+  # docker:
+  #   name: Build and push images
+  #   needs: build-and-test
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #     packages: write
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: docker/login-action@v3
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{ github.actor }}
+  #         password: ${{ secrets.GITHUB_TOKEN }}
+  #     - uses: docker/build-push-action@v6
+  #       with:
+  #         context: ./backend
+  #         push: true
+  #         tags: ghcr.io/${{ github.repository }}-backend:${{ github.sha }}
+
+
+  # ---------------------------------------------------------------------------
+  # M5 — Deployment.
+  # Add a deploy job here later.
+  # ---------------------------------------------------------------------------

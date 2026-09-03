@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyPlanner - Task Planner</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/task.css">
+
+</head>
+
+
+<body>
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= TOP BAR ================= -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <div class="logo">
+                    📚 StudyPlanner
+                </div>
+
+                <div class="page-title">
+
+                    <h1>Task Planner</h1>
+
+                    <p>
+                        Organize your study tasks and stay productive.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="top-icons">
+
+                <button id="themeButton" title="Toggle theme">
+                    🌙
+                </button>
+
+                <div class="icon-dropdown">
+
+                    <button id="notifButton" title="Notifications">
+                        🔔
+                        <span class="notif-dot"></span>
+                    </button>
+
+                    <div id="notifMenu" class="dropdown-menu hidden">
+
+                        <div class="dropdown-header">
+                            Notifications
+                        </div>
+
+                        <div class="dropdown-item">
+                            📌 "Complete DSA Arrays" is due tomorrow
+                        </div>
+
+                        <div class="dropdown-item">
+                            ✅ You completed 3 tasks today. Great job!
+                        </div>
+
+                        <div class="dropdown-item">
+                            ⚠️ You have overdue tasks pending
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="icon-dropdown">
+
+                    <button id="profileButton" class="profile-btn" title="Profile">
+                        👤
+                    </button>
+
+                    <div id="profileMenu" class="dropdown-menu hidden">
+
+                        <div class="dropdown-header profile-header">
+
+                            <div class="profile-avatar">👤</div>
+
+                            <div>
+                                <strong>Garima</strong>
+                                <p>garima@studyplanner.com</p>
+                            </div>
+
+                        </div>
+
+                        <a href="#" class="dropdown-item">
+                            👤 View Profile
+                        </a>
+
+                        <a href="#" class="dropdown-item">
+                            ⚙️ Settings
+                        </a>
+
+                        <a href="landing.html" class="dropdown-item logout-item">
+                            🚪 Logout
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= PAGE CONTENT ================= -->
+
+        <section class="content">
+
+
+            <!-- ================= WELCOME ================= -->
+
+            <div class="welcome-section">
+
+                <div>
+
+                    <h2>
+                        Good Evening 👋
+                    </h2>
+
+                    <p>
+                        Let's complete your study goals today.
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="addTaskButton"
+                    class="add-task-button"
+                >
+                    + Add New Task
+                </button>
+
+                <button
+                    id="clearCompletedButton"
+                    class="clear-completed-button"
+                >
+                    🧹 Clear Completed
+                </button>
+
+            </div>
+
+
+
+            <!-- ================= STATISTICS ================= -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <p>Total Tasks</p>
+
+                        <h3 id="totalTasks">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        ⏳
+                    </div>
+
+                    <div>
+
+                        <p>Pending</p>
+
+                        <h3 id="pendingTasks">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        🔄
+                    </div>
+
+                    <div>
+
+                        <p>In Progress</p>
+
+                        <h3 id="progressTasks">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        ✅
+                    </div>
+
+                    <div>
+
+                        <p>Completed</p>
+
+                        <h3 id="completedTasks">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+                        ⚠️
+                    </div>
+
+                    <div>
+
+                        <p>Overdue</p>
+
+                        <h3 id="overdueTasks">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= DAILY PROGRESS ================= -->
+
+            <div class="progress-box">
+
+                <div class="progress-heading">
+
+                    <div>
+
+                        <h3>
+                            Today's Progress
+                        </h3>
+
+                        <p id="progressText">
+                            0 of 0 tasks completed
+                        </p>
+
+                    </div>
+
+                    <strong id="progressPercent">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-background">
+
+                    <div
+                        id="progressBar"
+                        class="progress-bar"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= SEARCH & FILTER ================= -->
+
+            <div class="filter-box">
+
+
+                <!-- Search -->
+
+                <div class="search-box">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search tasks..."
+                    >
+
+                </div>
+
+
+
+                <!-- Subject -->
+
+                <select id="subjectFilter">
+
+                    <option value="all">
+                        All Subjects
+                    </option>
+
+                    <option value="DSA">
+                        DSA
+                    </option>
+
+                    <option value="Java">
+                        Java
+                    </option>
+
+                    <option value="DBMS">
+                        DBMS
+                    </option>
+
+                    <option value="Machine Learning">
+                        Machine Learning
+                    </option>
+
+                    <option value="Operating System">
+                        Operating System
+                    </option>
+
+                </select>
+
+
+
+                <!-- Priority -->
+
+                <select id="priorityFilter">
+
+                    <option value="all">
+                        All Priorities
+                    </option>
+
+                    <option value="High">
+                        High
+                    </option>
+
+                    <option value="Medium">
+                        Medium
+                    </option>
+
+                    <option value="Low">
+                        Low
+                    </option>
+
+                </select>
+
+
+
+                <!-- Status -->
+
+                <select id="statusFilter">
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="Pending">
+                        Pending
+                    </option>
+
+                    <option value="In Progress">
+                        In Progress
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                </select>
+
+
+
+                <!-- Category -->
+
+                <select id="categoryFilter">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="Assignment">
+                        Assignment
+                    </option>
+
+                    <option value="Revision">
+                        Revision
+                    </option>
+
+                    <option value="Practice">
+                        Practice
+                    </option>
+
+                    <option value="Lecture">
+                        Lecture
+                    </option>
+
+                </select>
+
+
+
+                <!-- Sort -->
+
+                <select id="sortSelect">
+
+                    <option value="newest">
+                        Newest First
+                    </option>
+
+                    <option value="oldest">
+                        Oldest First
+                    </option>
+
+                    <option value="priority">
+                        Priority
+                    </option>
+
+                    <option value="date">
+                        Due Date
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- ================= TASK CONTAINER ================= -->
+
+            <div id="taskContainer">
+
+                <!-- JavaScript will add tasks here -->
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= ADD / EDIT TASK MODAL ================= -->
+
+    <div
+        id="taskModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h2 id="modalTitle">
+                    Add New Task
+                </h2>
+
+                <button id="closeModal">
+                    ✕
+                </button>
+
+            </div>
+
+
+
+            <form id="taskForm">
+
+
+                <!-- Task Title -->
+
+                <div class="form-group">
+
+                    <label>
+                        Task Title *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="taskTitle"
+                        placeholder="Example: Complete DSA Arrays"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Description -->
+
+                <div class="form-group">
+
+                    <label>
+                        Description
+                    </label>
+
+                    <textarea
+                        id="taskDescription"
+                        placeholder="Write a short description..."
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- Subject + Category -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Subject *
+                        </label>
+
+                        <select id="taskSubject" required>
+
+                            <option value="">
+                                Select Subject
+                            </option>
+
+                            <option value="DSA">
+                                DSA
+                            </option>
+
+                            <option value="Java">
+                                Java
+                            </option>
+
+                            <option value="DBMS">
+                                DBMS
+                            </option>
+
+                            <option value="Machine Learning">
+                                Machine Learning
+                            </option>
+
+                            <option value="Operating System">
+                                Operating System
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select id="taskCategory">
+
+                            <option value="Assignment">
+                                Assignment
+                            </option>
+
+                            <option value="Revision">
+                                Revision
+                            </option>
+
+                            <option value="Practice">
+                                Practice
+                            </option>
+
+                            <option value="Lecture">
+                                Lecture
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Priority + Status -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Priority
+                        </label>
+
+                        <select id="taskPriority">
+
+                            <option value="High">
+                                High
+                            </option>
+
+                            <option value="Medium" selected>
+                                Medium
+                            </option>
+
+                            <option value="Low">
+                                Low
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select id="taskStatus">
+
+                            <option value="Pending">
+                                Pending
+                            </option>
+
+                            <option value="In Progress">
+                                In Progress
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Date + Time -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Due Date *
+                        </label>
+
+                        <input
+                            type="date"
+                            id="taskDate"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Due Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="taskTime"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Estimated Time -->
+
+                <div class="form-group">
+
+                    <label>
+                        Estimated Study Time
+                    </label>
+
+                    <select id="taskDuration">
+
+                        <option value="30 Minutes">
+                            30 Minutes
+                        </option>
+
+                        <option value="1 Hour">
+                            1 Hour
+                        </option>
+
+                        <option value="2 Hours" selected>
+                            2 Hours
+                        </option>
+
+                        <option value="3 Hours">
+                            3 Hours
+                        </option>
+
+                        <option value="4 Hours">
+                            4 Hours
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Buttons -->
+
+                <div class="form-buttons">
+
+                    <button
+                        type="button"
+                        id="cancelButton"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="save-button"
+                    >
+                        Save Task
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="task.js"></script>
+
+</body>
+
+</html>
