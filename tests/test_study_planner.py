@@ -25,7 +25,22 @@ class TestStudyPlanner(unittest.TestCase):
     def test_css_folder_exists(self):
         project_root = Path(__file__).parent.parent
         self.assertTrue((project_root / "css").is_dir())
+     
+    def test_javascript_files_exist(self):
+        project_root = Path(__file__).parent.parent
 
+        required_files = [
+            "Notes.js",
+            "script.js",
+            "task.js"
+        ]
+
+        for file in required_files:
+            with self.subTest(file=file):
+                self.assertTrue(
+                    (project_root / file).exists(),
+                    f"{file} is missing"
+                )
 
 if __name__ == "__main__":
     unittest.main()
