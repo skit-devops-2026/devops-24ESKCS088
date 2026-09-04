@@ -41,6 +41,23 @@ class TestStudyPlanner(unittest.TestCase):
                     (project_root / file).exists(),
                     f"{file} is missing"
                 )
+    def test_html_files_have_basic_structure(self):
+        project_root = Path(__file__).parent.parent
 
+        html_files = [
+            "index.html",
+            "landing.html",
+            "signup.html",
+            "task.html",
+            "Notes.html",
+        ]
+
+        for file in html_files:
+            with self.subTest(file=file):
+                content = (project_root / file).read_text(encoding="utf-8").lower()
+
+                self.assertIn("<html", content, f"{file} has no <html> tag")
+                self.assertIn("</html>", content, f"{file} has no closing </html> tag")
+                
 if __name__ == "__main__":
     unittest.main()
