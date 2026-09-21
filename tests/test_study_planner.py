@@ -30,9 +30,9 @@ class TestStudyPlanner(unittest.TestCase):
         project_root = Path(__file__).parent.parent
 
         required_files = [
-            "Notes.js",
-            "script.js",
-            "task.js"
+            "js/Notes.js",
+            "js/script.js",
+            "js/task.js"
         ]
 
         for file in required_files:
