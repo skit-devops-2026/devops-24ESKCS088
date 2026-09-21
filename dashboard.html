@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Planner - Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            📚 Study Planner
+        </div>
+
+        <div class="menu">
+
+            <a href="dashboard.html" class="active">
+                🏠 Dashboard
+            </a>
+
+            <a href="subjects.html">
+                📚 Subjects
+            </a>
+
+            <a href="task.html">
+                ✅ Task Planner
+            </a>
+
+            <a href="calendar.html">
+                📅 Calendar
+            </a>
+
+            <a href="Notes.html">
+                📝 Notes
+            </a>
+
+            <a href="exam.html">
+                📝 Exam Tracker
+            </a>
+
+            <a href="focus.html">
+                ⏱️ Focus Timer
+            </a>
+
+        </div>
+
+        <div class="bottom-menu">
+
+            <a href="settings.html">
+                ⚙️ Settings
+            </a>
+
+            <a href="landing.html">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <div class="main-content">
+
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <div>
+                <h1>Good Morning! 👋</h1>
+                <p id="todayDate">Let's make today productive.</p>
+            </div>
+
+            <div class="user-section">
+
+                <span class="notification">🔔</span>
+
+                <div class="user">
+                    👤
+                    <span>Student</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= QUOTE ================= -->
+
+        <div class="quote-card">
+
+            <div class="quote-icon">
+                💡
+            </div>
+
+            <div>
+                <h2>Quote of the Day</h2>
+
+                <p id="dailyQuote">
+                    "Success is the sum of small efforts, repeated day in and day out."
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- ================= FIRST ROW ================= -->
+
+        <div class="card-row">
+
+
+            <!-- Today's Task Progress -->
+
+            <div class="dashboard-card task-progress-card">
+
+                <div class="card-title">
+
+                    <h2>📋 Today's Task Progress</h2>
+
+                    <span>60%</span>
+
+                </div>
+
+                <div class="task-number">
+
+                    <strong id="completedTasks">6</strong>
+
+                    <span>/ 10 Tasks Completed</span>
+
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar task-bar"
+                        id="taskProgress"
+                        style="width: 60%;">
+                    </div>
+
+                </div>
+
+                <p id="remainingTasks">
+                    4 tasks remaining
+                </p>
+
+                <a href="task.html" class="view-link">
+                    View Tasks →
+                </a>
+
+            </div>
+
+
+            <!-- Subject Progress -->
+
+            <div class="dashboard-card">
+
+                <div class="card-title">
+
+                    <h2>📚 Subject Progress</h2>
+
+                    <a href="subjects.html">
+                        View All
+                    </a>
+
+                </div>
+
+
+                <div class="subject">
+
+                    <div class="subject-info">
+                        <span>DBMS</span>
+                        <span>80%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width: 80%;">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="subject">
+
+                    <div class="subject-info">
+                        <span>Operating System</span>
+                        <span>65%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width: 65%;">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="subject">
+
+                    <div class="subject-info">
+                        <span>Computer Networks</span>
+                        <span>50%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width: 50%;">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SECOND ROW ================= -->
+
+        <div class="card-row">
+
+
+            <!-- Upcoming Exam -->
+
+            <div class="dashboard-card exam-card">
+
+                <div class="card-title">
+
+                    <h2>📅 Upcoming Exam</h2>
+
+                    <a href="exam.html">
+                        View All
+                    </a>
+
+                </div>
+
+
+                <div class="exam-content">
+
+                    <div>
+
+                        <h3>DBMS</h3>
+
+                        <p>Database Management System</p>
+
+                        <span class="exam-date">
+                            📅 29 September
+                        </span>
+
+                    </div>
+
+
+                    <div class="days-left">
+
+                        <strong>15</strong>
+
+                        <span>Days Left</span>
+
+                    </div>
+
+                </div>
+
+
+                <a href="exam.html" class="view-button">
+                    View Exam
+                </a>
+
+            </div>
+
+
+            <!-- High Priority Tasks -->
+
+            <div class="dashboard-card priority-card">
+
+                <div class="card-title">
+
+                    <h2>🔥 High Priority Tasks</h2>
+
+                    <a href="task.html">
+                        View All
+                    </a>
+
+                </div>
+
+
+                <div class="priority-task">
+
+                    <div class="priority-dot"></div>
+
+                    <div>
+
+                        <h3>Complete DBMS Assignment</h3>
+
+                        <p>Due Today</p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="priority-task">
+
+                    <div class="priority-dot"></div>
+
+                    <div>
+
+                        <h3>OS Unit 3 Revision</h3>
+
+                        <p>Due Tomorrow</p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="priority-task">
+
+                    <div class="priority-dot"></div>
+
+                    <div>
+
+                        <h3>CN Assignment</h3>
+
+                        <p>Due in 2 Days</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <div class="quick-section">
+
+            <h2>Quick Actions</h2>
+
+            <div class="quick-actions">
+
+                <a href="task.html" class="quick-card">
+                    <span>➕</span>
+                    <p>Add Task</p>
+                </a>
+
+                <a href="Notes.html" class="quick-card">
+                    <span>📝</span>
+                    <p>New Note</p>
+                </a>
+
+                <a href="subjects.html" class="quick-card">
+                    <span>📚</span>
+                    <p>Add Subject</p>
+                </a>
+
+                <a href="focus.html" class="quick-card">
+                    <span>⏱️</span>
+                    <p>Start Focus</p>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
