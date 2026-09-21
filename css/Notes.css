@@ -1,3 +1,7 @@
+/* ================================================= */
+/* RESET */
+/* ================================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,44 +9,66 @@
 }
 
 
+/* ================================================= */
+/* BODY */
+/* ================================================= */
+
 body {
     font-family: Arial, sans-serif;
+
     background-color: #f5f6fa;
+
     color: #222;
 }
 
 
-/* ================= SIDEBAR ================= */
+/* ================================================= */
+/* SIDEBAR */
+/* ================================================= */
 
 .sidebar {
-    width: 230px;
+
+    width: 240px;
+
     height: 100vh;
 
     position: fixed;
+
     left: 0;
+
     top: 0;
 
-    background-color: white;
+    background-color: #18213a;
 
-    border-right: 1px solid #ddd;
+    color: white;
 
     padding: 25px 15px;
+
+    z-index: 10;
 }
 
 
 .sidebar h2 {
+
     text-align: center;
+
     margin-bottom: 30px;
+
+    font-size: 21px;
 }
 
 
+/* ================================================= */
+/* SIDEBAR MENU */
+/* ================================================= */
+
 .sidebar ul {
+
     list-style: none;
 }
 
 
 .sidebar li {
-    padding: 14px;
 
     margin-bottom: 8px;
 
@@ -52,32 +78,78 @@ body {
 }
 
 
-.sidebar li:hover {
-    background-color: #f0f0f0;
+.sidebar li a {
+
+    display: block;
+
+    padding: 14px;
+
+    text-decoration: none;
+
+    color: white;
+
+    border-radius: 8px;
+
+    font-size: 15px;
 }
 
 
-.sidebar .active {
-    background-color: #e8e7ff;
+.sidebar li:hover a {
 
-    color: #5146d8;
+    background-color: #293452;
+}
+
+
+.sidebar li.active a {
+
+    background-color: #5865d8;
+
+    color: white;
 
     font-weight: bold;
 }
 
 
-/* ================= MAIN ================= */
+/* ================================================= */
+/* BOTTOM MENU */
+/* ================================================= */
+
+.bottom-menu {
+
+    position: absolute;
+
+    bottom: 25px;
+
+    left: 15px;
+
+    right: 15px;
+}
+
+
+.bottom-menu li:last-child a {
+
+    color: #ffb4b4;
+}
+
+
+/* ================================================= */
+/* MAIN */
+/* ================================================= */
 
 .main {
-    margin-left: 230px;
+
+    margin-left: 240px;
 
     padding: 30px;
 }
 
 
-/* ================= HEADER ================= */
+/* ================================================= */
+/* HEADER */
+/* ================================================= */
 
 .header {
+
     display: flex;
 
     justify-content: space-between;
@@ -89,19 +161,22 @@ body {
 
 
 .header h1 {
+
     font-size: 30px;
+
+    margin-bottom: 5px;
 }
 
 
 .header p {
-    color: #777;
 
-    margin-top: 5px;
+    color: #777;
 }
 
 
 .add-note-button {
-    background-color: #5146d8;
+
+    background-color: #5865d8;
 
     color: white;
 
@@ -118,13 +193,17 @@ body {
 
 
 .add-note-button:hover {
-    background-color: #4037b7;
+
+    background-color: #4652c5;
 }
 
 
-/* ================= STATISTICS ================= */
+/* ================================================= */
+/* STATISTICS */
+/* ================================================= */
 
 .stats {
+
     display: grid;
 
     grid-template-columns:
@@ -137,6 +216,7 @@ body {
 
 
 .stat-card {
+
     background-color: white;
 
     padding: 20px;
@@ -150,16 +230,18 @@ body {
     gap: 15px;
 
     box-shadow:
-        0 2px 8px rgba(0,0,0,0.05);
+        0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 
 .stat-icon {
+
     font-size: 28px;
 }
 
 
 .stat-card h3 {
+
     font-size: 24px;
 
     margin-bottom: 5px;
@@ -167,13 +249,17 @@ body {
 
 
 .stat-card p {
+
     color: #777;
 }
 
 
-/* ================= SEARCH ================= */
+/* ================================================= */
+/* SEARCH */
+/* ================================================= */
 
 .search-area {
+
     display: flex;
 
     gap: 12px;
@@ -183,12 +269,14 @@ body {
 
 
 .search-area input {
+
     flex: 1;
 }
 
 
 .search-area input,
 .search-area select {
+
     padding: 12px;
 
     border: 1px solid #ddd;
@@ -196,12 +284,26 @@ body {
     border-radius: 7px;
 
     background-color: white;
+
+    font-size: 14px;
 }
 
 
-/* ================= FILTER BUTTONS ================= */
+.search-area input:focus,
+.search-area select:focus {
+
+    outline: none;
+
+    border-color: #5865d8;
+}
+
+
+/* ================================================= */
+/* FILTER BUTTONS */
+/* ================================================= */
 
 .filter-buttons {
+
     display: flex;
 
     gap: 10px;
@@ -213,6 +315,7 @@ body {
 
 
 .filter-button {
+
     padding: 9px 15px;
 
     border: none;
@@ -222,24 +325,31 @@ body {
     border-radius: 20px;
 
     cursor: pointer;
+
+    font-size: 14px;
 }
 
 
 .filter-button:hover {
+
     background-color: #eee;
 }
 
 
 .filter-button.active {
-    background-color: #5146d8;
+
+    background-color: #5865d8;
 
     color: white;
 }
 
 
-/* ================= NOTES ================= */
+/* ================================================= */
+/* NOTES GRID */
+/* ================================================= */
 
 .notes-container {
+
     display: grid;
 
     grid-template-columns:
@@ -249,9 +359,12 @@ body {
 }
 
 
-/* ================= NOTE CARD ================= */
+/* ================================================= */
+/* NOTE CARD */
+/* ================================================= */
 
 .note-card {
+
     background-color: white;
 
     padding: 20px;
@@ -259,18 +372,29 @@ body {
     border-radius: 10px;
 
     box-shadow:
-        0 2px 8px rgba(0,0,0,0.06);
+        0 2px 8px rgba(0, 0, 0, 0.06);
 
     position: relative;
+
+    transition: 0.2s;
 }
 
 
 .note-card:hover {
+
     transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 
+/* ================================================= */
+/* CARD TOP */
+/* ================================================= */
+
 .card-top {
+
     display: flex;
 
     justify-content: space-between;
@@ -282,18 +406,31 @@ body {
 
 
 .note-icon {
+
     font-size: 35px;
 }
 
 
+/* ================================================= */
+/* NOTE TITLE */
+/* ================================================= */
+
 .note-title {
+
     font-size: 19px;
 
     margin-bottom: 8px;
+
+    word-break: break-word;
 }
 
 
+/* ================================================= */
+/* SUBJECT */
+/* ================================================= */
+
 .subject {
+
     display: inline-block;
 
     background-color: #eeeeff;
@@ -308,43 +445,62 @@ body {
 }
 
 
+/* ================================================= */
+/* CONTENT */
+/* ================================================= */
+
 .note-content {
+
     color: #666;
 
     line-height: 1.5;
 
     margin: 12px 0;
+
+    word-break: break-word;
 }
 
 
 .file-size {
+
     color: #777;
 
     font-size: 13px;
 
     margin-top: 8px;
+
+    word-break: break-word;
 }
 
 
 .tags {
+
     color: #5146d8;
 
     font-size: 13px;
 
     margin: 12px 0;
+
+    word-break: break-word;
 }
 
 
 .note-date {
+
     color: #999;
 
     font-size: 12px;
+
+    margin-top: 10px;
 }
 
 
-/* ================= CARD BUTTONS ================= */
+/* ================================================= */
+/* CARD BUTTONS */
+/* ================================================= */
 
 .card-buttons {
+
     display: flex;
 
     gap: 7px;
@@ -356,6 +512,7 @@ body {
 
 
 .card-buttons button {
+
     border: none;
 
     background-color: #f1f1f1;
@@ -365,24 +522,31 @@ body {
     border-radius: 5px;
 
     cursor: pointer;
+
+    font-size: 13px;
 }
 
 
 .card-buttons button:hover {
+
     background-color: #ddd;
 }
 
 
 .open-button {
-    background-color: #5146d8 !important;
+
+    background-color: #5865d8 !important;
 
     color: white;
 }
 
 
-/* ================= EMPTY ================= */
+/* ================================================= */
+/* EMPTY MESSAGE */
+/* ================================================= */
 
 .empty-message {
+
     grid-column: 1 / -1;
 
     background-color: white;
@@ -392,10 +556,14 @@ body {
     text-align: center;
 
     border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 
 .empty-message .empty-icon {
+
     font-size: 55px;
 
     margin-bottom: 15px;
@@ -403,30 +571,37 @@ body {
 
 
 .empty-message h2 {
+
     margin-bottom: 8px;
 }
 
 
 .empty-message p {
+
     color: #777;
 }
 
 
-/* ================= POPUP ================= */
+/* ================================================= */
+/* POPUP */
+/* ================================================= */
 
 .popup {
+
     display: none;
 
     position: fixed;
 
     top: 0;
+
     left: 0;
 
     width: 100%;
+
     height: 100%;
 
     background-color:
-        rgba(0,0,0,0.45);
+        rgba(0, 0, 0, 0.45);
 
     justify-content: center;
 
@@ -437,6 +612,7 @@ body {
 
 
 .popup-box {
+
     width: 520px;
 
     max-height: 90vh;
@@ -452,11 +628,17 @@ body {
 
 
 .small-box {
+
     width: 400px;
 }
 
 
+/* ================================================= */
+/* POPUP HEADER */
+/* ================================================= */
+
 .popup-header {
+
     display: flex;
 
     justify-content: space-between;
@@ -467,7 +649,14 @@ body {
 }
 
 
+.popup-header h2 {
+
+    font-size: 22px;
+}
+
+
 .popup-header button {
+
     border: none;
 
     background: none;
@@ -478,9 +667,12 @@ body {
 }
 
 
-/* ================= FORM ================= */
+/* ================================================= */
+/* FORM */
+/* ================================================= */
 
 .popup-box label {
+
     display: block;
 
     margin-top: 15px;
@@ -488,12 +680,15 @@ body {
     margin-bottom: 6px;
 
     font-weight: bold;
+
+    font-size: 14px;
 }
 
 
 .popup-box input,
 .popup-box select,
 .popup-box textarea {
+
     width: 100%;
 
     padding: 11px;
@@ -501,19 +696,77 @@ body {
     border: 1px solid #ddd;
 
     border-radius: 6px;
+
+    font-family: Arial, sans-serif;
+}
+
+
+.popup-box input:focus,
+.popup-box select:focus,
+.popup-box textarea:focus {
+
+    outline: none;
+
+    border-color: #5865d8;
 }
 
 
 .popup-box textarea {
+
     height: 180px;
 
     resize: vertical;
 }
 
 
-/* ================= NOTE TYPE ================= */
+/* ================================================= */
+/* SUBJECT ROW */
+/* ================================================= */
+
+.subject-row {
+
+    display: flex;
+
+    gap: 8px;
+
+    align-items: center;
+}
+
+
+.subject-row select {
+
+    flex: 1;
+}
+
+
+.add-subject-small {
+
+    white-space: nowrap;
+
+    padding: 11px 12px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background-color: #eee;
+
+    cursor: pointer;
+}
+
+
+.add-subject-small:hover {
+
+    background-color: #ddd;
+}
+
+
+/* ================================================= */
+/* NOTE TYPE */
+/* ================================================= */
 
 .note-type-buttons {
+
     display: flex;
 
     gap: 10px;
@@ -523,6 +776,7 @@ body {
 
 
 .type-button {
+
     flex: 1;
 
     padding: 12px;
@@ -534,19 +788,25 @@ body {
     cursor: pointer;
 
     background-color: #eee;
+
+    font-size: 14px;
 }
 
 
 .type-button.active {
-    background-color: #5146d8;
+
+    background-color: #5865d8;
 
     color: white;
 }
 
 
-/* ================= UPLOAD ================= */
+/* ================================================= */
+/* UPLOAD */
+/* ================================================= */
 
 .upload-area {
+
     border: 2px dashed #bbb;
 
     padding: 35px 20px;
@@ -560,6 +820,7 @@ body {
 
 
 .upload-icon {
+
     font-size: 45px;
 
     margin-bottom: 10px;
@@ -567,6 +828,7 @@ body {
 
 
 .upload-area p {
+
     font-weight: bold;
 
     margin-bottom: 5px;
@@ -574,6 +836,7 @@ body {
 
 
 .upload-area span {
+
     display: block;
 
     color: #777;
@@ -583,11 +846,19 @@ body {
 
 
 .upload-area input {
+
     border: none;
+
+    padding: 5px;
 }
 
 
+/* ================================================= */
+/* SELECTED FILE */
+/* ================================================= */
+
 .selected-file {
+
     margin-top: 15px;
 
     padding: 10px;
@@ -597,12 +868,17 @@ body {
     border-radius: 6px;
 
     display: none;
+
+    word-break: break-word;
 }
 
 
-/* ================= SAVE ================= */
+/* ================================================= */
+/* SAVE BUTTON */
+/* ================================================= */
 
 .save-button {
+
     width: 100%;
 
     margin-top: 20px;
@@ -613,7 +889,7 @@ body {
 
     border-radius: 7px;
 
-    background-color: #5146d8;
+    background-color: #5865d8;
 
     color: white;
 
@@ -624,26 +900,36 @@ body {
 
 
 .save-button:hover {
-    background-color: #4037b7;
+
+    background-color: #4652c5;
 }
 
 
+/* ================================================= */
+/* HIDDEN */
+/* ================================================= */
+
 .hidden {
+
     display: none;
 }
 
 
-/* ================= RESPONSIVE ================= */
+/* ================================================= */
+/* RESPONSIVE */
+/* ================================================= */
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
 
     .notes-container {
+
         grid-template-columns:
             repeat(2, 1fr);
     }
 
 
     .stats {
+
         grid-template-columns:
             repeat(2, 1fr);
     }
@@ -651,41 +937,80 @@ body {
 }
 
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
 
     .sidebar {
+
+        width: 200px;
+    }
+
+
+    .main {
+
+        margin-left: 200px;
+
+        padding: 20px;
+    }
+
+
+    .notes-container {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .sidebar {
+
         display: none;
     }
 
 
     .main {
+
         margin-left: 0;
 
         padding: 15px;
     }
 
 
-    .notes-container {
-        grid-template-columns: 1fr;
-    }
-
-
     .stats {
-        grid-template-columns: 1fr 1fr;
+
+        grid-template-columns:
+            1fr 1fr;
     }
 
 
     .search-area {
+
         flex-direction: column;
     }
 
 
     .header {
+
         flex-direction: column;
 
         align-items: flex-start;
 
         gap: 15px;
+    }
+
+
+    .subject-row {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .add-subject-small {
+
+        width: 100%;
     }
 
 }
