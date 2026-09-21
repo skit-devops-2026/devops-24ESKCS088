@@ -2,61 +2,129 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Study Planner - Notes</title>
 
-    <link rel="stylesheet" href="css/Notes.css">
+    <link rel="stylesheet"
+          href="css/Notes.css">
+
 </head>
+
 
 <body>
 
-    <!-- ================= SIDEBAR ================= -->
+
+    <!-- ================================================= -->
+    <!-- SIDEBAR -->
+    <!-- ================================================= -->
 
     <div class="sidebar">
 
-        <h2>Study Planner</h2>
+        <h2>📚 Study Planner</h2>
 
-        <ul>
 
-            <li>🏠 Dashboard</li>
+        <ul class="menu">
 
-            <li onclick="openSubjectPopup()">
-                📚 Subjects
+            <li>
+                <a href="dashboard.html">
+                    🏠 Dashboard
+                </a>
             </li>
 
-            <li>✅ Tasks</li>
 
-            <li>📅 Calendar</li>
+            <li>
+                <a href="subjects.html">
+                    📚 Subjects
+                </a>
+            </li>
+
+
+            <li>
+                <a href="task.html">
+                    ✅ Task Planner
+                </a>
+            </li>
+
+
+            <li>
+                <a href="calendar.html">
+                    📅 Calendar
+                </a>
+            </li>
+
 
             <li class="active">
-                📝 Notes
+                <a href="Notes.html">
+                    📝 Notes
+                </a>
             </li>
 
-            <li>🎯 Goals</li>
 
-            <li>📊 Analytics</li>
+            <li>
+                <a href="exam.html">
+                    📝 Exam Tracker
+                </a>
+            </li>
+
+
+            <li>
+                <a href="focus.html">
+                    ⏱️ Focus Timer
+                </a>
+            </li>
+
+        </ul>
+
+
+        <!-- Bottom Menu -->
+
+        <ul class="bottom-menu">
+
+            <li>
+                <a href="settings.html">
+                    ⚙️ Settings
+                </a>
+            </li>
+
+
+            <li>
+                <a href="landing.html">
+                    🚪 Logout
+                </a>
+            </li>
 
         </ul>
 
     </div>
 
 
-    <!-- ================= MAIN ================= -->
+
+    <!-- ================================================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ================================================= -->
 
     <div class="main">
 
-        <!-- Header -->
+
+        <!-- ================= HEADER ================= -->
 
         <div class="header">
 
             <div>
-                <h1>My Notes</h1>
+
+                <h1>
+                    My Notes
+                </h1>
 
                 <p>
                     Create and manage your study notes
                 </p>
+
             </div>
 
 
@@ -71,9 +139,15 @@
         </div>
 
 
-        <!-- ================= STATISTICS ================= -->
+
+        <!-- ================================================= -->
+        <!-- STATISTICS -->
+        <!-- ================================================= -->
 
         <div class="stats">
+
+
+            <!-- Total Notes -->
 
             <div class="stat-card">
 
@@ -82,6 +156,7 @@
                 </div>
 
                 <div>
+
                     <h3 id="totalNotes">
                         0
                     </h3>
@@ -89,10 +164,13 @@
                     <p>
                         Total Notes
                     </p>
+
                 </div>
 
             </div>
 
+
+            <!-- PDF -->
 
             <div class="stat-card">
 
@@ -101,6 +179,7 @@
                 </div>
 
                 <div>
+
                     <h3 id="pdfNotes">
                         0
                     </h3>
@@ -108,10 +187,13 @@
                     <p>
                         PDF Files
                     </p>
+
                 </div>
 
             </div>
 
+
+            <!-- DOCX -->
 
             <div class="stat-card">
 
@@ -120,6 +202,7 @@
                 </div>
 
                 <div>
+
                     <h3 id="docxNotes">
                         0
                     </h3>
@@ -127,10 +210,13 @@
                     <p>
                         DOCX Files
                     </p>
+
                 </div>
 
             </div>
 
+
+            <!-- Subjects -->
 
             <div class="stat-card">
 
@@ -139,6 +225,7 @@
                 </div>
 
                 <div>
+
                     <h3 id="totalSubjects">
                         0
                     </h3>
@@ -146,6 +233,7 @@
                     <p>
                         Subjects
                     </p>
+
                 </div>
 
             </div>
@@ -153,9 +241,13 @@
         </div>
 
 
-        <!-- ================= SEARCH ================= -->
+
+        <!-- ================================================= -->
+        <!-- SEARCH AND FILTER -->
+        <!-- ================================================= -->
 
         <div class="search-area">
+
 
             <input
                 type="text"
@@ -220,9 +312,13 @@
         </div>
 
 
-        <!-- ================= FILTER BUTTONS ================= -->
+
+        <!-- ================================================= -->
+        <!-- FILTER BUTTONS -->
+        <!-- ================================================= -->
 
         <div class="filter-buttons">
+
 
             <button
                 class="filter-button active"
@@ -280,7 +376,10 @@
         </div>
 
 
-        <!-- ================= NOTES ================= -->
+
+        <!-- ================================================= -->
+        <!-- NOTES CONTAINER -->
+        <!-- ================================================= -->
 
         <div
             id="notesContainer"
@@ -291,6 +390,7 @@
     </div>
 
 
+
     <!-- ================================================= -->
     <!-- ADD NOTE POPUP -->
     <!-- ================================================= -->
@@ -299,13 +399,18 @@
         id="notePopup"
         class="popup">
 
+
         <div class="popup-box">
+
+
+            <!-- Popup Header -->
 
             <div class="popup-header">
 
                 <h2>
                     Add New Note
                 </h2>
+
 
                 <button
                     onclick="closeNotePopup()">
@@ -317,9 +422,11 @@
             </div>
 
 
-            <!-- NOTE TYPE -->
+
+            <!-- Note Type -->
 
             <div class="note-type-buttons">
+
 
                 <button
                     id="writeButton"
@@ -343,14 +450,18 @@
             </div>
 
 
-            <!-- ================= WRITE NOTE ================= -->
 
-            <div
-                id="writeNoteSection">
+            <!-- ================================================= -->
+            <!-- WRITE NOTE -->
+            <!-- ================================================= -->
+
+            <div id="writeNoteSection">
+
 
                 <label>
                     Note Title
                 </label>
+
 
                 <input
                     type="text"
@@ -359,30 +470,23 @@
                 >
 
 
-                <!-- <label>
-                    Subject
-                </label>
 
-                <select id="noteSubject">
-
-                    <option value="">
-                        No Subject Added
-                    </option>
-
-                </select> -->
                 <label>
                     Subject
                 </label>
 
+
                 <div class="subject-row">
+
 
                     <select id="noteSubject">
 
-                    <option value="">
-                    No Subject Added
-                    </option>
+                        <option value="">
+                            No Subject Added
+                        </option>
 
                     </select>
+
 
                     <button
                         type="button"
@@ -396,9 +500,11 @@
                 </div>
 
 
+
                 <label>
                     Tags
                 </label>
+
 
                 <input
                     type="text"
@@ -407,14 +513,17 @@
                 >
 
 
+
                 <label>
                     Write Your Note
                 </label>
+
 
                 <textarea
                     id="noteContent"
                     placeholder="Write your study note here..."
                 ></textarea>
+
 
 
                 <button
@@ -428,15 +537,20 @@
             </div>
 
 
-            <!-- ================= UPLOAD FILE ================= -->
+
+            <!-- ================================================= -->
+            <!-- UPLOAD FILE -->
+            <!-- ================================================= -->
 
             <div
                 id="uploadFileSection"
                 class="hidden">
 
+
                 <label>
                     Select Subject
                 </label>
+
 
                 <select id="fileSubject">
 
@@ -447,20 +561,25 @@
                 </select>
 
 
+
                 <label>
                     Select PDF or DOCX
                 </label>
 
 
+
                 <div class="upload-area">
+
 
                     <div class="upload-icon">
                         📎
                     </div>
 
+
                     <p>
                         Choose your study file
                     </p>
+
 
                     <span>
                         PDF or DOCX only
@@ -477,11 +596,13 @@
                 </div>
 
 
+
                 <div
                     id="selectedFile"
                     class="selected-file">
 
                 </div>
+
 
 
                 <button
@@ -499,6 +620,7 @@
     </div>
 
 
+
     <!-- ================================================= -->
     <!-- ADD SUBJECT POPUP -->
     <!-- ================================================= -->
@@ -507,13 +629,16 @@
         id="subjectPopup"
         class="popup">
 
+
         <div class="popup-box small-box">
+
 
             <div class="popup-header">
 
                 <h2>
                     Add Subject
                 </h2>
+
 
                 <button
                     onclick="closeSubjectPopup()">
@@ -523,6 +648,7 @@
                 </button>
 
             </div>
+
 
 
             <label>
@@ -535,6 +661,7 @@
                 id="subjectName"
                 placeholder="Example: DBMS"
             >
+
 
 
             <button
@@ -550,7 +677,13 @@
     </div>
 
 
-    <script src="Notes.js"></script>
+
+    <!-- ================================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================= -->
+
+    <script src="js/Notes.js"></script>
+
 
 </body>
 
