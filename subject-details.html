@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Subject Details - Study Planner</title>
+
+    <link rel="stylesheet"
+          href="css/subject-details.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2>📚 Study Planner</h2>
+
+        <ul class="menu">
+
+            <li>
+                <a href="dashboard.html">🏠 Dashboard</a>
+            </li>
+
+            <li class="active">
+                <a href="subjects.html">📚 Subjects</a>
+            </li>
+
+            <li>
+                <a href="task.html">✅ Task Planner</a>
+            </li>
+
+            <li>
+                <a href="calendar.html">📅 Calendar</a>
+            </li>
+
+            <li>
+                <a href="Notes.html">📝 Notes</a>
+            </li>
+
+            <li>
+                <a href="exam.html">📝 Exam Tracker</a>
+            </li>
+
+            <li>
+                <a href="focus.html">⏱️ Focus Timer</a>
+            </li>
+
+        </ul>
+
+
+        <ul class="bottom-menu">
+
+            <li>
+                <a href="settings.html">⚙️ Settings</a>
+            </li>
+
+            <li>
+                <a href="landing.html">🚪 Logout</a>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+
+    <!-- Main -->
+
+    <div class="main-content">
+
+
+        <!-- Back -->
+
+        <a href="subjects.html" class="back-btn">
+            ← Back to Subjects
+        </a>
+
+
+        <!-- Subject Header -->
+
+        <div class="subject-header">
+
+            <div>
+
+                <h1 id="subjectTitle">
+                    📚 Subject
+                </h1>
+
+                <p>
+                    Manage your syllabus and study material.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Progress -->
+
+        <div class="progress-card">
+
+            <div class="section-title">
+
+                <h2>📊 Syllabus Progress</h2>
+
+                <span id="progressPercent">
+                    0%
+                </span>
+
+            </div>
+
+
+            <div class="big-progress">
+
+                <div
+                    id="progressFill"
+                    class="big-progress-fill">
+                </div>
+
+            </div>
+
+
+            <p id="progressText">
+                0 of 0 topics completed
+            </p>
+
+        </div>
+
+
+
+        <!-- Syllabus -->
+
+        <div class="content-card">
+
+            <div class="card-header">
+
+                <h2>📄 Syllabus</h2>
+
+                <button
+                    class="primary-btn"
+                    onclick="openSyllabusPopup()">
+
+                    + Add Syllabus
+
+                </button>
+
+            </div>
+
+
+            <div id="syllabusContainer">
+
+                <p class="empty-text">
+                    No syllabus uploaded yet.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Topics -->
+
+        <div class="content-card">
+
+            <div class="card-header">
+
+                <h2>📖 Chapters / Topics</h2>
+
+                <button
+                    class="primary-btn"
+                    onclick="openTopicPopup()">
+
+                    + Add Topic
+
+                </button>
+
+            </div>
+
+
+            <div id="topicsContainer">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Notes -->
+
+        <div class="content-card">
+
+            <div class="card-header">
+
+                <h2>📝 Related Notes</h2>
+
+                <a href="Notes.html"
+                   class="secondary-btn">
+
+                    + Add Note
+
+                </a>
+
+            </div>
+
+
+            <div id="notesContainer">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Tasks -->
+
+        <div class="content-card">
+
+            <div class="card-header">
+
+                <h2>✅ Related Tasks</h2>
+
+                <a href="task.html"
+                   class="secondary-btn">
+
+                    + Add Task
+
+                </a>
+
+            </div>
+
+
+            <div id="tasksContainer">
+
+                <p class="empty-text">
+                    No related tasks found.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- Add Topic Popup -->
+
+    <div id="topicPopup" class="popup">
+
+        <div class="popup-content">
+
+            <span
+                class="close"
+                onclick="closeTopicPopup()">
+
+                &times;
+
+            </span>
+
+
+            <h2>📖 Add Topic</h2>
+
+
+            <label>Topic / Chapter Name</label>
+
+            <input
+                type="text"
+                id="topicName"
+                placeholder="Example: Normalization">
+
+
+            <label>Importance</label>
+
+            <select id="topicImportance">
+
+                <option value="Normal">
+                    Normal
+                </option>
+
+                <option value="Important">
+                    ⭐ Important
+                </option>
+
+            </select>
+
+
+            <button
+                class="save-btn"
+                onclick="addTopic()">
+
+                Add Topic
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Syllabus Popup -->
+
+    <div id="syllabusPopup" class="popup">
+
+        <div class="popup-content">
+
+            <span
+                class="close"
+                onclick="closeSyllabusPopup()">
+
+                &times;
+
+            </span>
+
+
+            <h2>📄 Add Syllabus</h2>
+
+
+            <label>
+                Upload PDF or Image
+            </label>
+
+
+            <input
+                type="file"
+                id="syllabusFile"
+                accept=".pdf,.jpg,.jpeg,.png">
+
+
+            <p class="small-text">
+
+                You can upload your syllabus
+                as PDF or photo.
+
+            </p>
+
+
+            <button
+                class="save-btn"
+                onclick="saveSyllabus()">
+
+                Upload Syllabus
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="js/subject-details.js"></script>
+
+</body>
+
+</html>

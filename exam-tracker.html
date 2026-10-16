@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyPlanner - Exam Tracker</title>
+
+    <!-- Our CSS file -->
+    <link rel="stylesheet" href="css/exam-tracker.css">
+
+</head>
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚 Study Planner
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html">🏠 Dashboard</a>
+            <a href="subjects.html">📚 Subjects</a>
+            <a href="task.html">✅ Task Planner</a>
+            <a href="calendar.html">📅 Calendar</a>
+            <a href="Notes.html">📝 Notes</a>
+            <a href="exam-tracker.html" class="active">📝 Exam Tracker</a>
+            <a href="focus.html">⏱️ Focus Timer</a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="#">⚙️ Settings</a>
+            <a href="landing.html">🚪 Logout</a>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- ================= TOP BAR ================= -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <div class="page-title">
+                    <h1>Exam Tracker</h1>
+                    <p>Keep track of upcoming exams and your syllabus progress.</p>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= PAGE BODY ================= -->
+
+        <div class="page-body">
+
+            <!-- Welcome / Add Exam banner -->
+            <section class="welcome-section">
+
+                <div>
+                    <h2>Exam Tracker 📝</h2>
+                    <p>Add your exams and check off topics as you finish revising.</p>
+                </div>
+
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <span id="streakBadge" class="streak-badge">🔥 0 day streak</span>
+                    <button id="addExamButton" class="add-exam-button">
+                        + Add New Exam
+                    </button>
+                </div>
+
+            </section>
+
+
+            <!-- UNIQUE FEATURE: Focus Today banner -->
+            <!-- This automatically shows the exam that needs attention most -->
+            <div id="focusBanner" class="focus-banner hidden">
+                <!-- Filled in by JavaScript -->
+            </div>
+
+
+            <!-- Stat cards -->
+            <section class="stats-section">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">📊</div>
+                    <div>
+                        <p>Total Exams</p>
+                        <h3 id="totalExamsCount">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">📅</div>
+                    <div>
+                        <p>This Week</p>
+                        <h3 id="thisWeekCount">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">⏳</div>
+                    <div>
+                        <p>Upcoming</p>
+                        <h3 id="upcomingCount">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✅</div>
+                    <div>
+                        <p>Completed</p>
+                        <h3 id="completedCount">0</h3>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- Exam list will be added here by JavaScript -->
+            <section id="examListSection" class="exam-list-section">
+
+                <!-- Exam cards get added here dynamically -->
+
+            </section>
+
+            <!-- Shown when there are no exams -->
+            <div id="emptyMessage" class="empty-message">
+                <div class="empty-icon">🗓️</div>
+                <h3>No exams added yet</h3>
+                <p>Click "Add New Exam" to get started.</p>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= ADD EXAM MODAL ================= -->
+
+    <div id="examModal" class="modal-overlay hidden">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2>Add New Exam</h2>
+                <button id="closeModalButton" class="close-button">✖</button>
+            </div>
+
+            <form id="examForm">
+
+                <div class="form-group">
+                    <label for="examName">Exam Name</label>
+                    <input type="text" id="examName" placeholder="e.g. DBMS Mid Term" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="examSubject">Subject</label>
+                    <select id="examSubject" required>
+                        <option value="">Select subject</option>
+                        <option value="DSA">DSA</option>
+                        <option value="Java">Java</option>
+                        <option value="DBMS">DBMS</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <option value="Operating System">Operating System</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="examDate">Date</label>
+                        <input type="date" id="examDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="examTime">Time</label>
+                        <input type="time" id="examTime">
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="examVenue">Venue / Mode</label>
+                    <input type="text" id="examVenue" placeholder="e.g. Room 204 or Online">
+                </div>
+
+                <button type="submit" class="submit-button">Save Exam</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- UNIQUE FEATURE: Celebration toast (shows when a syllabus is 100% done) -->
+    <div id="celebrationToast" class="celebration-toast hidden">
+        <!-- Filled in by JavaScript -->
+    </div>
+
+
+    <!-- Our JavaScript file -->
+    <script src="js/exam-tracker.js"></script>
+
+</body>
+</html>

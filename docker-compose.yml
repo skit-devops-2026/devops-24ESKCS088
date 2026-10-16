@@ -1,0 +1,7 @@
+services:
+  study-planner:
+    build: .
+    container_name: study-planner-container
+    ports:
+      - "8081:80"
+    restart: unless-stopped

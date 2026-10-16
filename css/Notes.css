@@ -26,7 +26,7 @@ body {
 /* SIDEBAR */
 /* ================================================= */
 
-.sidebar {
+/* .sidebar {
 
     width: 240px;
 
@@ -62,7 +62,7 @@ body {
 /* SIDEBAR MENU */
 /* ================================================= */
 
-.sidebar ul {
+/* .sidebar ul {
 
     list-style: none;
 }
@@ -91,10 +91,10 @@ body {
     border-radius: 8px;
 
     font-size: 15px;
-}
+} */
 
 
-.sidebar li:hover a {
+/* .sidebar li:hover a {
 
     background-color: #293452;
 }
@@ -107,14 +107,14 @@ body {
     color: white;
 
     font-weight: bold;
-}
+} */ 
 
 
 /* ================================================= */
 /* BOTTOM MENU */
 /* ================================================= */
 
-.bottom-menu {
+/* .bottom-menu {
 
     position: absolute;
 
@@ -129,6 +129,101 @@ body {
 .bottom-menu li:last-child a {
 
     color: #ffb4b4;
+} */
+
+/* ================================================= */
+/* SIDEBAR - SAME AS DASHBOARD */
+/* ================================================= */
+
+.sidebar {
+
+    width: 240px;
+
+    height: 100vh;
+
+    position: fixed;
+
+    left: 0;
+
+    top: 0;
+
+    background-color: #18213a;
+
+    padding: 25px 15px;
+}
+
+
+/* Logo */
+
+.sidebar .logo {
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    padding: 10px;
+
+    margin-bottom: 30px;
+}
+
+
+/* Menu */
+
+.sidebar .menu a,
+.sidebar .bottom-menu a {
+
+    display: block;
+
+    text-decoration: none;
+
+    color: #d5d9e5;
+
+    padding: 13px 15px;
+
+    margin-bottom: 7px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: normal;
+}
+
+
+/* Hover */
+
+.sidebar .menu a:hover,
+.sidebar .bottom-menu a:hover {
+
+    background-color: #293454;
+
+    color: white;
+}
+
+
+/* Active */
+
+.sidebar .menu a.active {
+
+    background-color: #5865d8;
+
+    color: white;
+}
+
+
+/* Bottom Menu */
+
+.sidebar .bottom-menu {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 15px;
+
+    right: 15px;
 }
 
 

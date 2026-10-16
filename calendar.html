@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calendar | Study Planner</title>
+
+    <link rel="stylesheet" href="css/calendar.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span>📚</span>
+            <h2>Study Planner</h2>
+        </div>
+
+        <nav class="menu">
+
+            <a href="dashboard.html">🏠 Dashboard</a>
+
+            <a href="subjects.html">📚 Subjects</a>
+
+            <a href="task.html">✅ Task Planner</a>
+
+            <a href="calendar.html" class="active">🗓️ Calendar</a>
+
+            <a href="notes.html">📝 Notes</a>
+
+            <a href="exam-tracker.html">📋 Exam Tracker</a>
+
+            <a href="focus.html">⏱️ Focus Timer</a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="settings.html">⚙️ Settings</a>
+
+            <a href="login.html">🚪 Logout</a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="page-header">
+
+            <div>
+                <h1>My Calendar</h1>
+
+                <p>Manage your schedule, tasks and deadlines.</p>
+            </div>
+
+            <button id="addEventBtn" class="add-event-btn">
+                + Add Event
+            </button>
+
+        </header>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple-icon">📅</div>
+
+                <div>
+                    <p>Events This Month</p>
+                    <h2 id="totalEvents">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange-icon">📝</div>
+
+                <div>
+                    <p>Tasks This Month</p>
+                    <h2 id="totalTasks">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon red-icon">📚</div>
+
+                <div>
+                    <p>Upcoming Exams</p>
+                    <h2 id="totalExams">0</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CALENDAR AND UPCOMING EVENTS ================= -->
+
+        <section class="calendar-layout">
+
+            <!-- CALENDAR CARD -->
+
+            <div class="calendar-card">
+
+                <div class="calendar-toolbar">
+
+                    <div class="month-navigation">
+
+                        <button id="prevMonthBtn" class="nav-btn">
+                            &#10094;
+                        </button>
+
+                        <h2 id="monthYear"></h2>
+
+                        <button id="nextMonthBtn" class="nav-btn">
+                            &#10095;
+                        </button>
+
+                    </div>
+
+                    <button id="todayBtn" class="today-btn">
+                        Today
+                    </button>
+
+                </div>
+
+
+                <!-- CALENDAR VIEWS -->
+
+                <div class="calendar-controls">
+
+                    <div class="view-buttons">
+
+                        <button class="view-btn active" data-view="month">
+                            Month
+                        </button>
+
+                        <button class="view-btn" data-view="week">
+                            Week
+                        </button>
+
+                        <button class="view-btn" data-view="day">
+                            Day
+                        </button>
+
+                    </div>
+
+                    <select id="categoryFilter">
+
+                        <option value="All">All Categories</option>
+
+                        <option value="Task">Tasks</option>
+
+                        <option value="Exam">Exams</option>
+
+                        <option value="Study">Study</option>
+
+                        <option value="Personal">Personal</option>
+
+                        <option value="Other">Other</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- CALENDAR GRID -->
+
+                <div class="calendar-grid">
+
+                    <div class="weekdays">
+
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                        <div>Sun</div>
+
+                    </div>
+
+                    <div id="calendarDays" class="calendar-days"></div>
+
+                </div>
+
+
+                <!-- CATEGORY LEGEND -->
+
+                <div class="category-legend">
+
+                    <span><i class="dot task-dot"></i> Tasks</span>
+
+                    <span><i class="dot exam-dot"></i> Exams</span>
+
+                    <span><i class="dot study-dot"></i> Study</span>
+
+                    <span><i class="dot personal-dot"></i> Personal</span>
+
+                    <span><i class="dot other-dot"></i> Other</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- UPCOMING EVENTS -->
+
+            <aside class="upcoming-card">
+
+                <div class="upcoming-heading">
+
+                    <div>
+                        <h2>Upcoming Events</h2>
+
+                        <p>Your next scheduled activities</p>
+                    </div>
+
+                    <span>📌</span>
+
+                </div>
+
+
+                <div id="upcomingEvents" class="upcoming-events"></div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- ================= EVENT MODAL ================= -->
+
+        <div id="eventModal" class="modal">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <div>
+                        <h2 id="modalTitle">Add New Event</h2>
+
+                        <p>Plan your study schedule.</p>
+                    </div>
+
+                    <button type="button" id="closeModalBtn"
+                            class="close-btn">
+                        &times;
+                    </button>
+
+                </div>
+
+
+                <form id="eventForm">
+
+                    <label for="eventTitle">
+                        Event Title <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="eventTitle"
+                        placeholder="e.g. DBMS Assignment"
+                        required
+                        maxlength="100"
+                    >
+
+
+                    <div class="form-row">
+
+                        <div>
+                            <label for="eventCategory">
+                                Category
+                            </label>
+
+                            <select id="eventCategory">
+
+                                <option value="Task">Task</option>
+
+                                <option value="Exam">Exam</option>
+
+                                <option value="Study">Study</option>
+
+                                <option value="Personal">Personal</option>
+
+                                <option value="Other">Other</option>
+
+                            </select>
+                        </div>
+
+
+                        <div>
+                            <label for="eventPriority">
+                                Priority
+                            </label>
+
+                            <select id="eventPriority">
+
+                                <option value="Low">Low</option>
+
+                                <option value="Medium" selected>
+                                    Medium
+                                </option>
+
+                                <option value="High">High</option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <label for="eventDate">
+                        Date <span>*</span>
+                    </label>
+
+                    <input
+                        type="date"
+                        id="eventDate"
+                        required
+                    >
+
+
+                    <div class="form-row">
+
+                        <div>
+                            <label for="startTime">
+                                Start Time
+                            </label>
+
+                            <input type="time" id="startTime">
+                        </div>
+
+                        <div>
+                            <label for="endTime">
+                                End Time
+                            </label>
+
+                            <input type="time" id="endTime">
+                        </div>
+
+                    </div>
+
+
+                    <label for="eventSubject">
+                        Subject / Project
+                    </label>
+
+                    <input
+                        type="text"
+                        id="eventSubject"
+                        placeholder="e.g. Mathematics, Study Planner"
+                        maxlength="100"
+                    >
+
+
+                    <label for="eventDescription">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="eventDescription"
+                        rows="3"
+                        placeholder="Add additional details..."
+                        maxlength="1000"
+                    ></textarea>
+
+
+                    <div class="modal-actions">
+
+                        <button type="button" id="cancelBtn"
+                                class="cancel-btn">
+                            Cancel
+                        </button>
+
+                        <button type="submit" class="save-btn">
+                            Save Event
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= EVENT DETAILS MODAL ================= -->
+
+        <div id="detailsModal" class="modal">
+
+            <div class="modal-content details-content">
+
+                <div class="modal-header">
+
+                    <div>
+                        <h2 id="detailsTitle">Event Details</h2>
+
+                        <p id="detailsCategory"></p>
+                    </div>
+
+                    <button type="button" id="closeDetailsBtn"
+                            class="close-btn">
+                        &times;
+                    </button>
+
+                </div>
+
+                <div id="eventDetailsBody" class="event-details-body"></div>
+
+                <div class="modal-actions">
+
+                    <button type="button" id="deleteEventBtn"
+                            class="delete-btn">
+                        Delete
+                    </button>
+
+                    <button type="button" id="editEventBtn"
+                            class="save-btn">
+                        Edit Event
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="js/calendar.js"></script>
+
+</body>
+</html>

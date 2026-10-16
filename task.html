@@ -7,12 +7,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>StudyPlanner - Task Planner</title>
+    <title>Study Planner - Task Planner</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Our CSS -->
     <link rel="stylesheet" href="css/task.css">
 
 </head>
@@ -20,9 +16,68 @@
 
 <body>
 
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            📚 Study Planner
+        </div>
+
+
+        <div class="menu">
+
+            <a href="dashboard.html">
+                🏠 Dashboard
+            </a>
+
+            <a href="subjects.html">
+                📚 Subjects
+            </a>
+
+            <a href="task.html" class="active">
+                ✅ Task Planner
+            </a>
+
+            <a href="calendar.html">
+                📅 Calendar
+            </a>
+
+            <a href="Notes.html">
+                📝 Notes
+            </a>
+
+            <a href="exam-tracker.html">
+                📝 Exam Tracker
+            </a>
+
+            <a href="focus.html">
+                ⏱️ Focus Timer
+            </a>
+
+        </div>
+
+
+        <div class="bottom-menu">
+
+            <a href="settings.html">
+                ⚙️ Settings
+            </a>
+
+            <a href="landing.html">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+
     <!-- ================= MAIN CONTENT ================= -->
 
-    <main class="main-content">
+    <div class="main-content">
 
 
         <!-- ================= TOP BAR ================= -->
@@ -31,10 +86,6 @@
 
             <div class="topbar-left">
 
-                <div class="logo">
-                    📚 StudyPlanner
-                </div>
-
                 <div class="page-title">
 
                     <h1>Task Planner</h1>
@@ -42,79 +93,6 @@
                     <p>
                         Organize your study tasks and stay productive.
                     </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="top-icons">
-
-                <button id="themeButton" title="Toggle theme">
-                    🌙
-                </button>
-
-                <div class="icon-dropdown">
-
-                    <button id="notifButton" title="Notifications">
-                        🔔
-                        <span class="notif-dot"></span>
-                    </button>
-
-                    <div id="notifMenu" class="dropdown-menu hidden">
-
-                        <div class="dropdown-header">
-                            Notifications
-                        </div>
-
-                        <div class="dropdown-item">
-                            📌 "Complete DSA Arrays" is due tomorrow
-                        </div>
-
-                        <div class="dropdown-item">
-                            ✅ You completed 3 tasks today. Great job!
-                        </div>
-
-                        <div class="dropdown-item">
-                            ⚠️ You have overdue tasks pending
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="icon-dropdown">
-
-                    <button id="profileButton" class="profile-btn" title="Profile">
-                        👤
-                    </button>
-
-                    <div id="profileMenu" class="dropdown-menu hidden">
-
-                        <div class="dropdown-header profile-header">
-
-                            <div class="profile-avatar">👤</div>
-
-                            <div>
-                                <strong>Garima</strong>
-                                <p>garima@studyplanner.com</p>
-                            </div>
-
-                        </div>
-
-                        <a href="#" class="dropdown-item">
-                            👤 View Profile
-                        </a>
-
-                        <a href="#" class="dropdown-item">
-                            ⚙️ Settings
-                        </a>
-
-                        <a href="landing.html" class="dropdown-item logout-item">
-                            🚪 Logout
-                        </a>
-
-                    </div>
 
                 </div>
 
@@ -148,16 +126,10 @@
 
                 <button
                     id="addTaskButton"
-                    class="add-task-button"
-                >
-                    + Add New Task
-                </button>
+                    class="add-task-button">
 
-                <button
-                    id="clearCompletedButton"
-                    class="clear-completed-button"
-                >
-                    🧹 Clear Completed
+                    + Add New Task
+
                 </button>
 
             </div>
@@ -300,8 +272,8 @@
 
                     <div
                         id="progressBar"
-                        class="progress-bar"
-                    ></div>
+                        class="progress-bar">
+                    </div>
 
                 </div>
 
@@ -323,8 +295,7 @@
                     <input
                         type="text"
                         id="searchInput"
-                        placeholder="Search tasks..."
-                    >
+                        placeholder="Search tasks...">
 
                 </div>
 
@@ -475,7 +446,7 @@
 
         </section>
 
-    </main>
+    </div>
 
 
 
@@ -483,8 +454,7 @@
 
     <div
         id="taskModal"
-        class="modal hidden"
-    >
+        class="modal hidden">
 
         <div class="modal-content">
 
@@ -518,8 +488,7 @@
                         type="text"
                         id="taskTitle"
                         placeholder="Example: Complete DSA Arrays"
-                        required
-                    >
+                        required>
 
                 </div>
 
@@ -535,8 +504,7 @@
 
                     <textarea
                         id="taskDescription"
-                        placeholder="Write a short description..."
-                    ></textarea>
+                        placeholder="Write a short description..."></textarea>
 
                 </div>
 
@@ -686,8 +654,7 @@
                         <input
                             type="date"
                             id="taskDate"
-                            required
-                        >
+                            required>
 
                     </div>
 
@@ -701,8 +668,7 @@
 
                         <input
                             type="time"
-                            id="taskTime"
-                        >
+                            id="taskTime">
 
                     </div>
 
@@ -753,16 +719,19 @@
                     <button
                         type="button"
                         id="cancelButton"
-                        class="cancel-button"
-                    >
+                        class="cancel-button">
+
                         Cancel
+
                     </button>
+
 
                     <button
                         type="submit"
-                        class="save-button"
-                    >
+                        class="save-button">
+
                         Save Task
+
                     </button>
 
                 </div>

@@ -1,95 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Planner - Login</title>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>StudyPlanner</title>
+
+    <!-- Connect CSS file -->
+    <link rel="stylesheet" href="css/landing.css">
+
 </head>
-<body class="bg-blue-50 flex items-center justify-center min-h-screen">
 
-    <div class="bg-white w-[380px] p-8 rounded-2xl shadow-xl">
+<body>
 
-        <!-- Heading -->
-        <h1 class="text-3xl font-bold text-center text-blue-600">
-            📚 Study Planner
-        </h1>
-        <!--
-        <p class="text-center text-gray-500 mt-2">
-            Welcome Back 👋
-        </p>
-        -->
 
-        <form class="mt-6">
+    <!-- ================= NAVBAR ================= -->
 
-            <!-- Email -->
-            <label class="block font-semibold text-gray-700 mb-2">
-                Email
-            </label>
+    <nav>
 
-            <input
-                type="email"
-                placeholder="Enter your email"
-                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-            >
+        <div class="logo">
+            📚 StudyPlanner
+        </div>
 
-            <!-- Password -->
-            <label class="block font-semibold text-gray-700 mb-2">
-                Password
-            </label>
+        <div class="nav-links">
 
-            <div class="relative">
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    class="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
+            <a href="landing.html">Home</a>
 
-                <span
-                    id="togglePassword"
-                    class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-xl"
-                >
-                    👁️
-                </span>
-            </div>
+            <a href="#features">Features</a>
 
-            <!-- Remember Me & Forgot Password -->
-            <div class="flex justify-between items-center mt-5 text-sm">
+            <a href="#about">About</a>
 
-                <label class="flex items-center gap-2 text-gray-600">
-                    <input type="checkbox">
-                    Remember Me
-                </label>
-
-                <a href="#" class="text-blue-600 hover:underline">
-                    Forgot Password?
-                </a>
-
-            </div>
-
-            <!-- Login Button -->
-            <button
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold mt-6 transition duration-300"
-            >
+            <!-- index.html = Login -->
+            <a href="login.html" class="login-btn">
                 Login
-            </button>
+            </a>
 
-            <!-- Signup -->
-            <p class="text-center text-gray-600 mt-5">
-                Don't have an account?
-                <a href="signup.html" class="text-blue-600 font-semibold hover:underline">
-                    Sign Up
-                </a>
-            </p>
+            <!-- signup.html = Signup -->
+            <a href="signup.html" class="signup-btn">
+                Sign Up
+            </a>
 
-        </form>
+        </div>
 
-    </div>
+    </nav>
 
-    <script src="js/script.js"></script>
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero" id="home">
+
+        <h1>
+            Study Smarter.
+            <span>Plan Better.</span>
+        </h1>
+
+        <p>
+            StudyPlanner is your personal study companion.
+            Manage your subjects, tasks, exams, notes and
+            goals in one simple and organized place.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="signup.html" class="start-btn">
+                Get Started →
+            </a>
+
+            <a href="#features" class="learn-btn">
+                Explore Features
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MARQUEE SECTION ================= -->
+
+    <section class="marquee-section">
+
+        <div class="marquee">
+
+            <div class="feature-box">📚 Subjects</div>
+
+            <div class="feature-box">✅ Tasks</div>
+
+            <div class="feature-box">📅 Calendar</div>
+
+            <div class="feature-box">📝 Notes</div>
+
+            <div class="feature-box">🎯 Goals</div>
+
+            <div class="feature-box">📊 Analytics</div>
+
+            <div class="feature-box">📝 Exams</div>
+
+            <div class="feature-box">⏱️ Focus Timer</div>
+
+
+            <!-- Repeated boxes for continuous marquee -->
+
+            <div class="feature-box">📚 Subjects</div>
+
+            <div class="feature-box">✅ Tasks</div>
+
+            <div class="feature-box">📅 Calendar</div>
+
+            <div class="feature-box">📝 Notes</div>
+
+            <div class="feature-box">🎯 Goals</div>
+
+            <div class="feature-box">📊 Analytics</div>
+
+            <div class="feature-box">📝 Exams</div>
+
+            <div class="feature-box">⏱️ Focus Timer</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="section" id="features">
+
+        <h2>
+            Everything You Need to Study Better
+        </h2>
+
+        <p class="section-description">
+            Manage your complete study routine from one place.
+        </p>
+
+
+        <div class="features">
+
+
+            <!-- Feature 1 -->
+
+            <div class="card">
+
+                <div class="icon">📚</div>
+
+                <h3>Subject Management</h3>
+
+                <p>
+                    Add subjects and topics and
+                    track your completion progress.
+                </p>
+
+            </div>
+
+
+            <!-- Feature 2 -->
+
+            <div class="card">
+
+                <div class="icon">✅</div>
+
+                <h3>Task Planner</h3>
+
+                <p>
+                    Create tasks, set priorities
+                    and manage deadlines.
+                </p>
+
+            </div>
+
+
+            <!-- Feature 3 -->
+
+            <div class="card">
+
+                <div class="icon">📅</div>
+
+                <h3>Calendar</h3>
+
+                <p>
+                    Manage your tasks, exams and
+                    important study dates.
+                </p>
+
+            </div>
+
+
+            <!-- Feature 4 -->
+
+            <div class="card">
+
+                <div class="icon">📝</div>
+
+                <h3>Notes</h3>
+
+                <p>
+                    Create and organize your
+                    study notes easily.
+                </p>
+
+            </div>
+
+
+            <!-- Feature 5 -->
+
+            <div class="card">
+
+                <div class="icon">🎯</div>
+
+                <h3>Goals</h3>
+
+                <p>
+                    Set study goals and
+                    track your progress.
+                </p>
+
+            </div>
+
+
+            <!-- Feature 6 -->
+
+            <div class="card">
+
+                <div class="icon">📊</div>
+
+                <h3>Analytics</h3>
+
+                <p>
+                    Check your study progress
+                    using simple charts.
+                </p>
+
+            </div>
+
+
+            <!-- Feature 7 -->
+
+            <div class="card">
+
+                <div class="icon">📝</div>
+
+                <h3>Exam Tracker</h3>
+
+                <p>
+                    Keep track of upcoming exams
+                    and preparation.
+                </p>
+
+            </div>
+
+
+            <!-- Feature 8 -->
+
+            <div class="card">
+
+                <div class="icon">⏱️</div>
+
+                <h3>Focus Timer</h3>
+
+                <p>
+                    Use the Pomodoro timer
+                    for focused study sessions.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+
+    <section class="section">
+
+        <h2>
+            How StudyPlanner Works
+        </h2>
+
+        <p class="section-description">
+            Start organizing your studies in three simple steps.
+        </p>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="number">1</div>
+
+                <h3>Plan</h3>
+
+                <p>
+                    Add your subjects, tasks,
+                    exams and study goals.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="number">2</div>
+
+                <h3>Study</h3>
+
+                <p>
+                    Complete your tasks and
+                    use the focus timer.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="number">3</div>
+
+                <h3>Track</h3>
+
+                <p>
+                    Check your progress and
+                    improve your study routine.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="section about" id="about">
+
+        <h2>
+            About StudyPlanner
+        </h2>
+
+        <p>
+
+            StudyPlanner is designed to help students
+            organize their academic life in one place.
+            Instead of using different apps for tasks,
+            notes, exams and goals, students can manage
+            everything from a single dashboard.
+
+        </p>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta">
+
+        <h2>
+            Ready to Plan Your Studies?
+        </h2>
+
+        <p>
+            Start organizing your study routine today.
+        </p>
+
+        <a href="signup.html">
+            Create Your Account →
+        </a>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-content">
+
+
+            <!-- Website information -->
+
+            <div>
+
+                <h3>
+                    📚 StudyPlanner
+                </h3>
+
+                <p>
+                    Plan your studies, stay organized
+                    and achieve your academic goals.
+                </p>
+
+            </div>
+
+
+            <!-- Quick links -->
+
+            <div>
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#home">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="#features">Features</a>
+                    </li>
+
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Account -->
+
+            <div>
+
+                <h3>
+                    Account
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="login.html">
+                            Login
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="signup.html">
+                            Sign Up
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 StudyPlanner. All Rights Reserved.
+
+        </div>
+
+    </footer>
+
 
 </body>
+
 </html>

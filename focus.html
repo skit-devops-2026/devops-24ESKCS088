@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Focus Timer | Study Planner</title>
+
+    <link rel="stylesheet" href="css/focus.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span>📚</span>
+            <h2>Study Planner</h2>
+        </div>
+
+        <nav class="menu">
+
+            <a href="dashboard.html">🏠 Dashboard</a>
+            <a href="subjects.html">📚 Subjects</a>
+            <a href="tasks.html">✅ Task Planner</a>
+            <a href="calendar.html">🗓️ Calendar</a>
+            <a href="notes.html">📝 Notes</a>
+            <a href="exam-tracker.html">📋 Exam Tracker</a>
+            <a href="focus.html" class="active">⏱️ Focus Timer</a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="settings.html">⚙️ Settings</a>
+            <a href="login.html">🚪 Logout</a>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Focus Timer</h1>
+                <p>Stay focused. One task at a time.</p>
+            </div>
+
+            <div class="profile">🎯 My Study Space</div>
+
+        </header>
+
+
+        <!-- STATISTICS -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <span class="stat-icon purple">⏱️</span>
+
+                <div>
+                    <p>Total Focus Time</p>
+                    <h2 id="totalFocus">0 min</h2>
+                    <small>Today's study time</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-icon green">✓</span>
+
+                <div>
+                    <p>Completed Sessions</p>
+                    <h2 id="totalSessions">0</h2>
+                    <small>Today's completed sessions</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-icon orange">🎯</span>
+
+                <div>
+                    <p>Daily Focus Goal</p>
+                    <h2 id="goalText">0 / 4 hrs</h2>
+
+                    <div class="progress-bar">
+                        <div id="goalProgress"></div>
+                    </div>
+
+                    <button type="button" id="changeGoalBtn" class="text-btn">
+                        Change daily goal
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- TIMER AND SESSION DETAILS -->
+        <section class="focus-layout">
+
+            <!-- TIMER -->
+            <div class="timer-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h2 id="timerHeading">Focus Session</h2>
+                        <p id="timerStatus">Ready when you are</p>
+                    </div>
+
+                    <span class="ready-badge" id="statusBadge">
+                        ● Ready
+                    </span>
+                </div>
+
+
+                <!-- MODES -->
+                <div class="timer-modes">
+
+                    <button type="button" class="mode-btn active"
+                            data-mode="focus">
+                        Focus
+                    </button>
+
+                    <button type="button" class="mode-btn"
+                            data-mode="short">
+                        Short Break
+                    </button>
+
+                    <button type="button" class="mode-btn"
+                            data-mode="long">
+                        Long Break
+                    </button>
+
+                </div>
+
+
+                <!-- TIME SETTINGS -->
+                <div class="duration-settings">
+
+                    <div>
+                        <label for="durationInput">
+                            Duration (minutes)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="durationInput"
+                            min="1"
+                            max="180"
+                            value="25"
+                        >
+                    </div>
+
+                    <button type="button" id="applyDurationBtn">
+                        Apply Time
+                    </button>
+
+                </div>
+
+
+                <!-- TIMER CIRCLE -->
+                <div class="timer-circle" id="timerCircle">
+
+                    <div class="timer-inner">
+
+                        <span id="timerLabel">FOCUS TIME</span>
+
+                        <h1 id="timerDisplay">25:00</h1>
+
+                        <p id="timerMessage">Ready to focus?</p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTROLS -->
+                <div class="timer-controls">
+
+                    <button type="button" id="startPauseBtn"
+                            class="primary-btn">
+                        ▶ Start
+                    </button>
+
+                    <button type="button" id="resetBtn"
+                            class="secondary-btn">
+                        ↻ Reset
+                    </button>
+
+                    <button type="button" id="finishBtn"
+                            class="finish-btn">
+                        ✓ Finish
+                    </button>
+
+                </div>
+
+
+                <p class="timer-tip">
+                    💡 Focus on one thing at a time. Every minute counts.
+                </p>
+
+            </div>
+
+
+            <!-- SESSION DETAILS -->
+            <div class="session-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h2>Current Session</h2>
+                        <p>Customize your focus session.</p>
+                    </div>
+
+                    <span>📖</span>
+                </div>
+
+
+                <form id="sessionForm">
+
+                    <label for="subjectInput">
+                        Subject / Project / Category
+                        <span>(Optional)</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="subjectInput"
+                        placeholder="e.g. Mathematics, College Project"
+                    >
+
+
+                    <label for="topicInput">
+                        Topic / Task
+                        <span>(Optional)</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="topicInput"
+                        placeholder="e.g. Integration, Build login page"
+                    >
+
+
+                    <label for="studyGoal">
+                        What do you want to accomplish?
+                        <span>(Optional)</span>
+                    </label>
+
+                    <textarea
+                        id="studyGoal"
+                        rows="4"
+                        placeholder="Write your study or project goal..."
+                    ></textarea>
+
+
+                    <button type="submit" class="save-btn">
+                        💾 Save Details
+                    </button>
+
+                    <button type="button" id="clearDetailsBtn"
+                            class="clear-btn">
+                        Clear Details
+                    </button>
+
+                </form>
+
+
+                <div class="session-note">
+                    💡 Study, coding, projects, reading, assignments —
+                    use your timer for anything.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HISTORY -->
+        <section class="history-card">
+
+            <div class="history-heading">
+                <div>
+                    <h2>Today's Focus History</h2>
+                    <p>Review the sessions you worked on today.</p>
+                </div>
+
+                <button type="button" id="clearHistoryBtn"
+                        class="clear-history-btn">
+                    Clear History
+                </button>
+            </div>
+
+            <div id="historyList" class="history-list">
+
+                <div class="empty-history">
+                    <span>📚</span>
+                    <h3>No sessions yet</h3>
+                    <p>Your saved sessions will appear here.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/focus.js"></script>
+
+</body>
+</html>

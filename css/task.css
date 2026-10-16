@@ -22,13 +22,165 @@ textarea {
 }
 
 
+/* /* =========================
+   SIDEBAR
+========================= */
+/*
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: #161a2c;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.sidebar-logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 10px;
+    margin-bottom: 30px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sidebar-nav a,
+.sidebar-bottom a {
+    color: #b8bcd0;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.sidebar-nav a:hover,
+.sidebar-bottom a:hover {
+    background: #232741;
+    color: white;
+}
+
+.sidebar-nav a.active {
+    background: #4f46e5;
+    color: white;
+    font-weight: bold;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 15px;
+    border-top: 1px solid #2a2e48;
+}
+*/
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    background-color: #18213a;
+
+    padding: 25px 15px;
+
+    z-index: 100;
+}
+
+
+/* Logo */
+
+.logo {
+    color: white !important;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    padding: 10px;
+
+    margin-bottom: 30px;
+}
+
+/* Menu */
+
+.menu a,
+.bottom-menu a {
+
+    display: block;
+
+    text-decoration: none;
+
+    color: #d5d9e5;
+
+    padding: 13px 15px;
+
+    margin-bottom: 7px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+}
+
+
+/* Hover */
+
+.menu a:hover,
+.bottom-menu a:hover {
+
+    background-color: #293454;
+
+    color: white;
+}
+
+
+/* Active */
+
+.menu a.active {
+
+    background-color: #5865d8;
+
+    color: white;
+}
+
+
+/* Bottom menu */
+
+.bottom-menu {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 15px;
+    right: 15px;
+}
+
 /* =========================
    MAIN CONTENT
 ========================= */
 
 .main-content {
     min-height: 100vh;
-}
+    margin-left: 250px;
+} 
 
 
 /* =========================
@@ -347,38 +499,6 @@ textarea {
     transform: translateY(-2px);
 
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
-}
-
-
-.clear-completed-button {
-    background: transparent;
-
-    color: white;
-
-    border: 1.5px solid white;
-
-    padding: 12px 20px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    margin-left: 10px;
-
-    transition: 0.3s;
-}
-
-
-.clear-completed-button:hover {
-    background: white;
-
-    color: #4f46e5;
-
-    transform: translateY(-2px);
 }
 
 

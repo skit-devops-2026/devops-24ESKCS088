@@ -5,7 +5,6 @@
 const taskModal = document.getElementById("taskModal");
 
 const addTaskButton = document.getElementById("addTaskButton");
-const clearCompletedButton = document.getElementById("clearCompletedButton");
 
 const closeModal = document.getElementById("closeModal");
 
@@ -94,13 +93,6 @@ let editingTaskId = null;
 // ===============================
 // OPEN MODAL
 // ===============================
-
-clearCompletedButton.addEventListener("click", function () {
-
-    clearCompletedTasks();
-
-});
-
 
 addTaskButton.addEventListener("click", function () {
 
@@ -921,58 +913,6 @@ function deleteTask(id) {
 
 
 // ===============================
-// CLEAR COMPLETED TASKS
-// ===============================
-
-function clearCompletedTasks() {
-
-    const completedCount =
-        tasks.filter(function (task) {
-
-            return task.status === "Completed";
-
-        }).length;
-
-
-    if (completedCount === 0) {
-
-        alert("No completed tasks to clear!");
-
-        return;
-
-    }
-
-
-    const answer =
-        confirm(
-            "Remove all " + completedCount + " completed task(s)?"
-        );
-
-
-    if (!answer) {
-
-        return;
-
-    }
-
-
-    tasks = tasks.filter(function (task) {
-
-        return task.status !== "Completed";
-
-    });
-
-
-    saveTasks();
-
-    displayTasks();
-
-    updateStatistics();
-
-}
-
-
-// ===============================
 // COMPLETE TASK
 // ===============================
 
@@ -1191,119 +1131,14 @@ sortSelect.addEventListener(
 
 // ===============================
 // DARK MODE
+// (No toggle button on this page - dark mode is
+// controlled from the Dashboard. We just check here
+// if dark mode was turned on there, and apply it.)
 // ===============================
 
-const themeButton =
-    document.getElementById(
-        "themeButton"
-    );
-
-
-themeButton.addEventListener(
-    "click",
-    function () {
-
-        document.body.classList.toggle(
-            "dark"
-        );
-
-
-        if (
-            document.body.classList.contains(
-                "dark"
-            )
-        ) {
-
-            themeButton.textContent =
-                "☀️";
-
-        }
-
-        else {
-
-            themeButton.textContent =
-                "🌙";
-
-        }
-
-    }
-);
-
-
-// ===============================
-// NOTIFICATION & PROFILE DROPDOWNS
-// ===============================
-
-const notifButton =
-    document.getElementById("notifButton");
-
-const notifMenu =
-    document.getElementById("notifMenu");
-
-const profileButton =
-    document.getElementById("profileButton");
-
-const profileMenu =
-    document.getElementById("profileMenu");
-
-
-function closeAllDropdowns(except) {
-
-    if (notifMenu && notifMenu !== except) {
-        notifMenu.classList.add("hidden");
-    }
-
-    if (profileMenu && profileMenu !== except) {
-        profileMenu.classList.add("hidden");
-    }
-
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
 }
-
-
-notifButton.addEventListener(
-    "click",
-    function (e) {
-
-        e.stopPropagation();
-
-        const willOpen = notifMenu.classList.contains("hidden");
-
-        closeAllDropdowns();
-
-        if (willOpen) {
-            notifMenu.classList.remove("hidden");
-        }
-
-    }
-);
-
-
-profileButton.addEventListener(
-    "click",
-    function (e) {
-
-        e.stopPropagation();
-
-        const willOpen = profileMenu.classList.contains("hidden");
-
-        closeAllDropdowns();
-
-        if (willOpen) {
-            profileMenu.classList.remove("hidden");
-        }
-
-    }
-);
-
-
-// Close dropdowns when clicking anywhere else
-
-document.addEventListener(
-    "click",
-    function () {
-        closeAllDropdowns();
-    }
-);
 
 
 // ===============================

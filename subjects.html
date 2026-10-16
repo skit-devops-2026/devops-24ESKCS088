@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjects - Study Planner</title>
+
+    <link rel="stylesheet" href="css/subjects.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <!-- <div class="sidebar">
+
+        <h2>📚 Study Planner</h2>
+
+        <ul class="menu">
+
+            <li>
+                <a href="dashboard.html">🏠 Dashboard</a>
+            </li>
+
+            <li class="active">
+                <a href="subjects.html">📚 Subjects</a>
+            </li>
+
+            <li>
+                <a href="task.html">✅ Task Planner</a>
+            </li>
+
+            <li>
+                <a href="calendar.html">📅 Calendar</a>
+            </li>
+
+            <li>
+                <a href="Notes.html">📝 Notes</a>
+            </li>
+
+            <li>
+                <a href="exam-tracker.html">📝 Exam Tracker</a>
+            </li>
+
+            <li>
+                <a href="focus.html">⏱️ Focus Timer</a>
+            </li>
+
+        </ul>
+
+        <ul class="bottom-menu">
+
+            <li>
+                <a href="settings.html">⚙️ Settings</a>
+            </li>
+
+            <li>
+                <a href="landing.html">🚪 Logout</a>
+            </li>
+
+        </ul>
+
+    </div> -->
+<div class="sidebar">
+
+    <div class="logo">
+        📚 Study Planner
+    </div>
+
+    <div class="menu">
+
+        <a href="dashboard.html">
+            🏠 Dashboard
+        </a>
+
+        <a href="subjects.html" class="active">
+            📚 Subjects
+        </a>
+
+        <a href="task.html">
+            ✅ Task Planner
+        </a>
+
+        <a href="calendar.html">
+            📅 Calendar
+        </a>
+
+        <a href="Notes.html">
+            📝 Notes
+        </a>
+
+        <a href="exam-tracker.html">
+            📝 Exam Tracker
+        </a>
+
+        <a href="focus.html">
+            ⏱️ Focus Timer
+        </a>
+
+    </div>
+
+    <div class="bottom-menu">
+
+        <a href="settings.html">
+            ⚙️ Settings
+        </a>
+
+        <a href="landing.html">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <div class="top-bar">
+
+            <div>
+                <h1>📚 Subject Management</h1>
+                <p>Manage your subjects and track your syllabus.</p>
+            </div>
+
+            <button class="add-btn" onclick="openSubjectPopup()">
+                + Add Subject
+            </button>
+
+        </div>
+
+
+        <!-- Statistics -->
+        <div class="stats-container">
+
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div>
+                    <h3 id="totalSubjects">0</h3>
+                    <p>Total Subjects</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📖</div>
+                <div>
+                    <h3 id="totalTopics">0</h3>
+                    <p>Total Topics</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div>
+                    <h3 id="completedTopics">0</h3>
+                    <p>Topics Completed</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div>
+                    <h3 id="overallProgress">0%</h3>
+                    <p>Overall Progress</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Search -->
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchSubject"
+                placeholder="🔎 Search subject..."
+                onkeyup="displaySubjects()"
+            >
+
+        </div>
+
+
+        <!-- Subjects -->
+        <div id="subjectsContainer" class="subjects-container">
+        </div>
+
+    </div>
+
+
+    <!-- Add Subject Popup -->
+    <div id="subjectPopup" class="popup">
+
+        <div class="popup-content">
+
+            <span class="close" onclick="closeSubjectPopup()">
+                &times;
+            </span>
+
+            <h2>➕ Add Subject</h2>
+
+            <label>Subject Name</label>
+
+            <input
+                type="text"
+                id="subjectName"
+                placeholder="Example: DBMS"
+            >
+
+            <label>Subject Code</label>
+
+            <input
+                type="text"
+                id="subjectCode"
+                placeholder="Example: CS301"
+            >
+
+            <label>Teacher Name</label>
+
+            <input
+                type="text"
+                id="teacherName"
+                placeholder="Optional"
+            >
+
+            <button class="save-btn" onclick="addSubject()">
+                Add Subject
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/subjects.js"></script>
+
+</body>
+</html>
