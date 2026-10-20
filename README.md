@@ -22,7 +22,16 @@ Open `landing.html` in a web browser.
 
 ## Live URL
 
-Add once M5 is done. Until then, leave as is.
+https://skit-devops-2026.github.io/devops-24ESKCS088/
+
+## Docker Image
+
+Docker Hub: https://hub.docker.com/r/bhawanak19/study-planner
+
+Pull command:
+
+```bash
+docker pull bhawanak19/study-planner:latest
 
 ## Health endpoint
 
