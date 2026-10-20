@@ -32,6 +32,7 @@ Pull command:
 
 ```bash
 docker pull bhawanak19/study-planner:latest
+```
 
 ## Health endpoint
 
