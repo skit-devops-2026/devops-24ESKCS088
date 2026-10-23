@@ -33,6 +33,20 @@ Pull command:
 ```bash
 docker pull bhawanak19/study-planner:latest
 ```
+## 📸 Project Screenshots
+
+### Docker Dashboard
+![Docker Dashboard](docs/docker-dashboard.png)
+
+### Kubernetes Deployment
+![Kubernetes Deployment](docs/kubernetes-deployment.png)
+
+### Grafana Monitoring Dashboard
+![Grafana Dashboard](docs/grafana-dashboard.png)
+
+### Application Deployment
+![Deployment](docs/deployment.png)
+
 
 ## Health endpoint
 
