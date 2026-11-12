@@ -4,8 +4,11 @@ const calendarEventSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
+            ref: 'User'
+        },
+        userEmail: {
+            type: String,
+            trim: true
         },
         title: {
             type: String,

@@ -34,15 +34,15 @@ app.get('/api', (req, res) => {
     });
 });
 
-// Routes placeholders (will be connected in Module 3)
-// app.use('/api/auth', require('./routes/authRoutes'));
-// app.use('/api/tasks', require('./routes/taskRoutes'));
-// app.use('/api/subjects', require('./routes/subjectRoutes'));
-// app.use('/api/notes', require('./routes/noteRoutes'));
-// app.use('/api/exams', require('./routes/examRoutes'));
-// app.use('/api/focus', require('./routes/focusRoutes'));
-// app.use('/api/calendar', require('./routes/calendarRoutes'));
-// app.use('/api/dashboard', require('./routes/dashboardRoutes'));
+// Connect API Routes
+app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/tasks', require('./routes/taskRoutes'));
+app.use('/api/subjects', require('./routes/subjectRoutes'));
+app.use('/api/notes', require('./routes/noteRoutes'));
+app.use('/api/exams', require('./routes/examRoutes'));
+app.use('/api/focus', require('./routes/focusRoutes'));
+app.use('/api/calendar', require('./routes/calendarRoutes'));
+app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 
 // 404 Handler
 app.use((req, res, next) => {

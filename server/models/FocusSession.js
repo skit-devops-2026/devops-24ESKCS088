@@ -4,8 +4,15 @@ const focusSessionSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
+            ref: 'User'
+        },
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        userEmail: {
+            type: String,
+            trim: true
         },
         subject: {
             type: String,
@@ -24,7 +31,6 @@ const focusSessionSchema = new mongoose.Schema(
         },
         mode: {
             type: String,
-            enum: ['focus', 'short', 'long'],
             default: 'focus'
         },
         duration: {
@@ -37,12 +43,23 @@ const focusSessionSchema = new mongoose.Schema(
         },
         status: {
             type: String,
-            enum: ['Completed', 'Abandoned', 'In Progress'],
             default: 'Completed'
         },
-        date: {
+        completed: {
+            type: Boolean,
+            default: true
+        },
+        progress: {
+            type: Number,
+            default: 0
+        },
+        priority: {
             type: String,
-            default: () => new Date().toISOString().split('T')[0] // YYYY-MM-DD
+            default: 'Medium'
+        },
+        date: {
+            type: mongoose.Schema.Types.Mixed, // allows String or Date
+            default: () => new Date().toISOString()
         },
         time: {
             type: String,
@@ -50,8 +67,18 @@ const focusSessionSchema = new mongoose.Schema(
         }
     },
     {
-        timestamps: true
+        timestamps: true,
+        collection: 'focus' // maps directly to the user's existing collection in studyplanner
     }
 );
+
+focusSessionSchema.pre('save', function (next) {
+    if (this.userId && !this.user) {
+        this.user = this.userId;
+    } else if (this.user && !this.userId) {
+        this.userId = this.user;
+    }
+    next();
+});
 
 module.exports = mongoose.model('FocusSession', focusSessionSchema);

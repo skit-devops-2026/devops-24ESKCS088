@@ -4,8 +4,15 @@ const taskSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
+            ref: 'User'
+        },
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        userEmail: {
+            type: String,
+            trim: true
         },
         title: {
             type: String,
@@ -29,7 +36,6 @@ const taskSchema = new mongoose.Schema(
         },
         priority: {
             type: String,
-            enum: ['Low', 'Medium', 'High'],
             default: 'Medium'
         },
         status: {
@@ -37,9 +43,20 @@ const taskSchema = new mongoose.Schema(
             enum: ['Pending', 'In Progress', 'Completed'],
             default: 'Pending'
         },
+        completed: {
+            type: Boolean,
+            default: false
+        },
+        progress: {
+            type: Number,
+            default: 0
+        },
         date: {
             type: String,
-            required: [true, 'Please provide a task date']
+            default: () => new Date().toISOString().split('T')[0]
+        },
+        dueDate: {
+            type: Date
         },
         time: {
             type: String,
@@ -54,5 +71,21 @@ const taskSchema = new mongoose.Schema(
         timestamps: true
     }
 );
+
+// Pre-save middleware to keep user/userId and completed/status in sync
+taskSchema.pre('save', function (next) {
+    if (this.userId && !this.user) {
+        this.user = this.userId;
+    } else if (this.user && !this.userId) {
+        this.userId = this.user;
+    }
+
+    if (this.completed && this.status !== 'Completed') {
+        this.status = 'Completed';
+    } else if (this.status === 'Completed' && !this.completed) {
+        this.completed = true;
+    }
+    next();
+});
 
 module.exports = mongoose.model('Task', taskSchema);

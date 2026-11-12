@@ -36,8 +36,15 @@ const subjectSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
+            ref: 'User'
+        },
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        userEmail: {
+            type: String,
+            trim: true
         },
         name: {
             type: String,
@@ -53,6 +60,19 @@ const subjectSchema = new mongoose.Schema(
             type: String,
             trim: true,
             default: ''
+        },
+        description: {
+            type: String,
+            trim: true,
+            default: ''
+        },
+        priority: {
+            type: String,
+            default: 'Medium'
+        },
+        completed: {
+            type: Boolean,
+            default: false
         },
         color: {
             type: String,
@@ -71,5 +91,14 @@ const subjectSchema = new mongoose.Schema(
         timestamps: true
     }
 );
+
+subjectSchema.pre('save', function (next) {
+    if (this.userId && !this.user) {
+        this.user = this.userId;
+    } else if (this.user && !this.userId) {
+        this.userId = this.user;
+    }
+    next();
+});
 
 module.exports = mongoose.model('Subject', subjectSchema);
