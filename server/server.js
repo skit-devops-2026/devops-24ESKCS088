@@ -44,6 +44,18 @@ app.use('/api/focus', require('./routes/focusRoutes'));
 app.use('/api/calendar', require('./routes/calendarRoutes'));
 app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 
+// Serve static frontend assets in production
+const path = require('path');
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+    app.get('*', (req, res, next) => {
+        if (req.path.startsWith('/api') || req.path === '/health') {
+            return next();
+        }
+        res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));
+    });
+}
+
 // 404 Handler
 app.use((req, res, next) => {
     res.status(404).json({ error: 'Endpoint not found' });
@@ -59,7 +71,7 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-if (process.env.NODE_ENV !== 'test') {
+if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`🚀 Study Planner Server running on port ${PORT}`);
     });

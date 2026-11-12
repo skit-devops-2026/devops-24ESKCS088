@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Pages
 import LandingPage from './pages/LandingPage';
@@ -28,15 +29,17 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignupPage />} />
 
-                    {/* App Feature Routes */}
-                    <Route path="/dashboard" element={<DashboardPage />} />
-                    <Route path="/tasks" element={<TaskPlannerPage />} />
-                    <Route path="/subjects" element={<SubjectsPage />} />
-                    <Route path="/subjects/:id" element={<SubjectDetailsPage />} />
-                    <Route path="/notes" element={<NotesPage />} />
-                    <Route path="/exam-tracker" element={<ExamTrackerPage />} />
-                    <Route path="/focus" element={<FocusTimerPage />} />
-                    <Route path="/calendar" element={<CalendarPage />} />
+                    {/* Protected Feature Routes */}
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/dashboard" element={<DashboardPage />} />
+                        <Route path="/tasks" element={<TaskPlannerPage />} />
+                        <Route path="/subjects" element={<SubjectsPage />} />
+                        <Route path="/subjects/:id" element={<SubjectDetailsPage />} />
+                        <Route path="/notes" element={<NotesPage />} />
+                        <Route path="/exam-tracker" element={<ExamTrackerPage />} />
+                        <Route path="/focus" element={<FocusTimerPage />} />
+                        <Route path="/calendar" element={<CalendarPage />} />
+                    </Route>
 
                     {/* Fallback */}
                     <Route path="*" element={<Navigate to="/" replace />} />
