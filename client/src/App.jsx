@@ -18,34 +18,66 @@ import CalendarPage from './pages/CalendarPage';
 
 import './App.css';
 
+class ErrorBoundary extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { hasError: false, error: null };
+    }
+    static getDerivedStateFromError(error) {
+        return { hasError: true, error };
+    }
+    componentDidCatch(error, errorInfo) {
+        console.error("Dashboard Render Error:", error, errorInfo);
+    }
+    render() {
+        if (this.state.hasError) {
+            return (
+                <div style={{ padding: '50px', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
+                    <h2 style={{ color: '#4f46e5' }}>📚 Study Planner</h2>
+                    <p style={{ color: '#555', marginTop: '10px' }}>Notice: An issue occurred loading this section.</p>
+                    <button 
+                        onClick={() => { window.location.href = '/dashboard'; }}
+                        style={{ marginTop: '20px', padding: '10px 24px', background: '#4f46e5', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
+                    >
+                        Reload Dashboard
+                    </button>
+                </div>
+            );
+        }
+        return this.props.children;
+    }
+}
+
 function App() {
     return (
-        <AuthProvider>
-            <BrowserRouter>
-                <Routes>
-                    {/* Public & Auth Routes */}
-                    <Route path="/" element={<LandingPage />} />
-                    <Route path="/landing" element={<LandingPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<SignupPage />} />
+        <ErrorBoundary>
+            <AuthProvider>
+                <BrowserRouter>
+                    <Routes>
+                        {/* Public & Auth Routes */}
+                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/landing" element={<LandingPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/signup" element={<SignupPage />} />
 
-                    {/* Protected Feature Routes */}
-                    <Route element={<ProtectedRoute />}>
-                        <Route path="/dashboard" element={<DashboardPage />} />
-                        <Route path="/tasks" element={<TaskPlannerPage />} />
-                        <Route path="/subjects" element={<SubjectsPage />} />
-                        <Route path="/subjects/:id" element={<SubjectDetailsPage />} />
-                        <Route path="/notes" element={<NotesPage />} />
-                        <Route path="/exam-tracker" element={<ExamTrackerPage />} />
-                        <Route path="/focus" element={<FocusTimerPage />} />
-                        <Route path="/calendar" element={<CalendarPage />} />
-                    </Route>
+                        {/* Protected Feature Routes */}
+                        <Route element={<ProtectedRoute />}>
+                            <Route path="/dashboard" element={<DashboardPage />} />
+                            <Route path="/tasks" element={<TaskPlannerPage />} />
+                            <Route path="/subjects" element={<SubjectsPage />} />
+                            <Route path="/subjects/:id" element={<SubjectDetailsPage />} />
+                            <Route path="/notes" element={<NotesPage />} />
+                            <Route path="/exam-tracker" element={<ExamTrackerPage />} />
+                            <Route path="/focus" element={<FocusTimerPage />} />
+                            <Route path="/calendar" element={<CalendarPage />} />
+                        </Route>
 
-                    {/* Fallback */}
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-            </BrowserRouter>
-        </AuthProvider>
+                        {/* Fallback */}
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                    </Routes>
+                </BrowserRouter>
+            </AuthProvider>
+        </ErrorBoundary>
     );
 }
 

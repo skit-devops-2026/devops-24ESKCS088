@@ -315,23 +315,52 @@ const dataStore = {
         const userSubjects = this.getSubjects(userId);
         const userSessions = this.getFocusSessions(userId);
 
-        const completedTasks = userTasks.filter(t => t.status === 'Completed' || t.completed).length;
+        const totalTasksCount = userTasks.length;
+        const completedTasksCount = userTasks.filter(t => t.status === 'Completed' || t.completed).length;
+        const remainingTasksCount = Math.max(0, totalTasksCount - completedTasksCount);
+        const taskPercentage = totalTasksCount > 0 ? Math.round((completedTasksCount / totalTasksCount) * 100) : 0;
         const totalMinutes = userSessions.reduce((acc, s) => acc + (s.duration || 0), 0);
 
+        const foundUser = users.find(u => String(u._id) === String(userId)) || users[0];
+
         return {
-            tasks: {
-                total: userTasks.length,
-                completed: completedTasks,
-                pending: userTasks.length - completedTasks
+            user: {
+                name: foundUser ? foundUser.name : 'Student',
+                email: foundUser ? foundUser.email : '',
+                avatar: foundUser ? foundUser.avatar : '👤'
             },
-            subjectsCount: userSubjects.length,
-            upcomingExamsCount: userExams.length,
-            todayFocusMinutes: totalMinutes,
-            dailyGoalHours: '4.0',
-            dailyGoalProgress: Math.min(100, Math.round((totalMinutes / 240) * 100)),
-            quote: {
-                quote: 'Success is the sum of small efforts, repeated day in and day out.',
-                author: 'Robert Collier'
+            quote: 'Success is the sum of small efforts, repeated day in and day out.',
+            todayDate: new Date().toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }),
+            tasks: {
+                total: totalTasksCount,
+                completed: completedTasksCount,
+                remaining: remainingTasksCount,
+                percentage: taskPercentage
+            },
+            subjects: userSubjects.map(s => ({
+                _id: s._id,
+                name: s.name,
+                progress: 60,
+                topics: s.topics || []
+            })),
+            upcomingExams: userExams.map(e => ({
+                _id: e._id,
+                title: e.subject || 'DSA Midterm',
+                subject: e.subject || 'Data Structures',
+                date: e.date || new Date().toISOString().split('T')[0],
+                daysLeft: 7
+            })),
+            focus: {
+                todayMinutes: totalMinutes,
+                todayHours: (totalMinutes / 60).toFixed(1)
+            },
+            notes: {
+                total: notes.length
             }
         };
     }

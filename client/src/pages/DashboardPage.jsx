@@ -26,18 +26,24 @@ const DashboardPage = () => {
     }, []);
 
     const greeting = 'Good Morning! 👋';
-    const studentName = user?.name || stats?.user?.name || 'Student';
-    const todayDate = stats?.todayDate || new Date().toLocaleDateString('en-US', {
-        weekday: 'long',
-        month: 'long',
-        day: 'numeric'
-    });
-    const quote = stats?.quote || '"Success is the sum of small efforts, repeated day in and day out."';
+    const studentName = (typeof user?.name === 'string' ? user.name : '') || 
+                        (typeof stats?.user?.name === 'string' ? stats.user.name : '') || 
+                        'Student';
+    const todayDate = (typeof stats?.todayDate === 'string' ? stats.todayDate : '') || 
+                      new Date().toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          month: 'long',
+                          day: 'numeric'
+                      });
+
+    const quote = typeof stats?.quote === 'object' && stats?.quote !== null
+        ? (stats.quote.quote || stats.quote.text || '"Success is the sum of small efforts, repeated day in and day out."')
+        : (stats?.quote || '"Success is the sum of small efforts, repeated day in and day out."');
 
     const tasksTotal = stats?.tasks?.total || 0;
     const tasksCompleted = stats?.tasks?.completed || 0;
-    const tasksRemaining = stats?.tasks?.remaining || 0;
-    const taskProgressPct = stats?.tasks?.percentage || 0;
+    const tasksRemaining = stats?.tasks?.remaining ?? Math.max(0, tasksTotal - tasksCompleted);
+    const taskProgressPct = stats?.tasks?.percentage ?? (tasksTotal > 0 ? Math.round((tasksCompleted / tasksTotal) * 100) : 0);
 
     const subjects = stats?.subjects?.length > 0 ? stats.subjects : [
         { name: 'DBMS', progress: 80 },
@@ -144,14 +150,14 @@ const DashboardPage = () => {
                         {upcomingExam ? (
                             <div className="exam-content">
                                 <div>
-                                    <h3>{upcomingExam.title}</h3>
-                                    <p>{upcomingExam.subject}</p>
+                                    <h3>{upcomingExam.title || upcomingExam.subject || 'Midterm Exam'}</h3>
+                                    <p>{upcomingExam.subject || 'General'}</p>
                                     <span className="exam-date">
-                                        📅 {typeof upcomingExam.date === 'string' ? upcomingExam.date.slice(0, 10) : new Date(upcomingExam.date).toLocaleDateString()}
+                                        📅 {upcomingExam.date ? (typeof upcomingExam.date === 'string' ? upcomingExam.date.slice(0, 10) : new Date(upcomingExam.date).toLocaleDateString()) : 'Upcoming'}
                                     </span>
                                 </div>
                                 <div className="days-left">
-                                    <strong>{upcomingExam.daysLeft}</strong>
+                                    <strong>{upcomingExam.daysLeft ?? 7}</strong>
                                     <span>Days Left</span>
                                 </div>
                             </div>
