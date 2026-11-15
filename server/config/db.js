@@ -15,8 +15,19 @@ const connectDB = async () => {
 
     isConnecting = true;
 
+    const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/studyplanner';
+    const isLocalhost = uri.includes('127.0.0.1') || uri.includes('localhost');
+
+    // In production (like on Render), avoid spamming localhost connection attempts if no cloud DB is provided
+    if (process.env.NODE_ENV === 'production' && isLocalhost) {
+        console.log('ℹ️ Running in cloud environment without external MongoDB Atlas URI.');
+        console.log('🚀 High-performance built-in storage (dataStore) is active for authentication, tasks and dashboard.');
+        console.log('💡 To connect to MongoDB Atlas, add MONGO_URI in Render Dashboard -> Environment.');
+        isConnecting = false;
+        return;
+    }
+
     try {
-        const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/studyplanner';
         console.log(`Connecting to MongoDB...`);
 
         // Fail-fast buffer timeout so requests never hang for 10s
@@ -37,29 +48,43 @@ const connectDB = async () => {
             retryTimeout = null;
         }
     } catch (error) {
-        console.error(`❌ MongoDB Connection Error: ${error.message}`);
         isConnecting = false;
-        console.warn(`🔄 Will retry connecting to MongoDB in 3 seconds...`);
+        if (process.env.NODE_ENV === 'production' && isLocalhost) {
+            console.log('ℹ️ Localhost MongoDB not available in cloud. Using in-memory fallback storage.');
+            return;
+        }
+        console.error(`❌ MongoDB Connection Error: ${error.message}`);
+        console.warn(`🔄 Will retry connecting to MongoDB in 10 seconds...`);
         if (!retryTimeout) {
             retryTimeout = setTimeout(() => {
                 retryTimeout = null;
                 connectDB();
-            }, 3000);
+            }, 10000);
         }
     }
 };
 
 mongoose.connection.on('disconnected', () => {
-    console.warn(`⚠️ MongoDB disconnected! Retrying connection in 3 seconds...`);
+    const uri = process.env.MONGO_URI || '';
+    const isLocalhost = !uri || uri.includes('127.0.0.1') || uri.includes('localhost');
+    if (process.env.NODE_ENV === 'production' && isLocalhost) {
+        return;
+    }
+    console.warn(`⚠️ MongoDB disconnected! Retrying connection in 10 seconds...`);
     if (!retryTimeout) {
         retryTimeout = setTimeout(() => {
             retryTimeout = null;
             connectDB();
-        }, 3000);
+        }, 10000);
     }
 });
 
 mongoose.connection.on('error', (err) => {
+    const uri = process.env.MONGO_URI || '';
+    const isLocalhost = !uri || uri.includes('127.0.0.1') || uri.includes('localhost');
+    if (process.env.NODE_ENV === 'production' && isLocalhost) {
+        return;
+    }
     console.error(`❌ MongoDB Runtime Error: ${err.message}`);
 });
 
