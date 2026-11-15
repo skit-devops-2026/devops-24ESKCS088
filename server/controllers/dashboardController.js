@@ -1,4 +1,6 @@
+const mongoose = require('mongoose');
 const { Task, Subject, Exam, Note, FocusSession } = require('../models');
+const dataStore = require('../utils/dataStore');
 
 const quotes = [
     "Success is the sum of small efforts, repeated day in and day out.",
@@ -14,6 +16,10 @@ const quotes = [
 // @access  Private
 const getDashboardStats = async (req, res) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            return res.json(dataStore.getDashboardStats(req.user?._id));
+        }
+
         const userFilter = {
             $or: [
                 { user: req.user._id },

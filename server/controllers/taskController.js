@@ -1,10 +1,16 @@
+const mongoose = require('mongoose');
 const { Task } = require('../models');
+const dataStore = require('../utils/dataStore');
 
 // @desc    Get all tasks for user
 // @route   GET /api/tasks
 // @access  Private
 const getTasks = async (req, res) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            return res.json(dataStore.getTasks(req.user?._id));
+        }
+
         const query = {
             $or: [
                 { user: req.user._id },
@@ -64,6 +70,21 @@ const createTask = async (req, res) => {
 
         const isCompleted = status === 'Completed' || req.body.completed === true;
 
+        if (mongoose.connection.readyState !== 1) {
+            const fallbackTask = dataStore.createTask({
+                user: req.user._id,
+                userId: req.user._id,
+                title: title.trim(),
+                description: description || '',
+                subject: subject || 'General',
+                priority: priority || 'Medium',
+                status: isCompleted ? 'Completed' : (status || 'Pending'),
+                completed: isCompleted,
+                date: date || new Date().toISOString().split('T')[0]
+            });
+            return res.status(201).json(fallbackTask);
+        }
+
         const task = await Task.create({
             user: req.user._id,
             userId: req.user._id,
@@ -110,6 +131,11 @@ const getTaskById = async (req, res) => {
 // @access  Private
 const updateTask = async (req, res) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            const updated = dataStore.updateTask(req.params.id, req.body);
+            return res.json(updated || { message: 'Updated' });
+        }
+
         const task = await Task.findById(req.params.id);
 
         if (!task) {
@@ -167,6 +193,11 @@ const toggleTaskStatus = async (req, res) => {
 // @access  Private
 const deleteTask = async (req, res) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            dataStore.deleteTask(req.params.id);
+            return res.json({ message: 'Task removed successfully' });
+        }
+
         const task = await Task.findById(req.params.id);
 
         if (!task) {

@@ -1,10 +1,16 @@
+const mongoose = require('mongoose');
 const { Subject } = require('../models');
+const dataStore = require('../utils/dataStore');
 
 // @desc    Get all subjects for user
 // @route   GET /api/subjects
 // @access  Private
 const getSubjects = async (req, res) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            return res.json(dataStore.getSubjects(req.user?._id));
+        }
+
         const subjects = await Subject.find({
             $or: [
                 { user: req.user._id },
@@ -28,6 +34,18 @@ const createSubject = async (req, res) => {
 
         if (!name) {
             return res.status(400).json({ error: 'Please provide a subject name' });
+        }
+
+        if (mongoose.connection.readyState !== 1) {
+            const subject = dataStore.createSubject({
+                user: req.user._id,
+                userId: req.user._id,
+                name: name.trim(),
+                code: code || '',
+                teacher: teacher || '',
+                description: description || ''
+            });
+            return res.status(201).json(subject);
         }
 
         const subject = await Subject.create({

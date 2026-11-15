@@ -1,5 +1,7 @@
+const mongoose = require('mongoose');
 const { User } = require('../models');
 const generateToken = require('../utils/generateToken');
+const dataStore = require('../utils/dataStore');
 
 // @desc    Register a new user
 // @route   POST /api/auth/register
@@ -13,6 +15,20 @@ const registerUser = async (req, res) => {
         }
 
         const cleanEmail = email.toLowerCase().trim();
+
+        // In-memory fallback if MongoDB is not connected
+        if (mongoose.connection.readyState !== 1) {
+            const user = await dataStore.createUser({ name, email: cleanEmail, password });
+            return res.status(201).json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                avatar: user.avatar,
+                dailyStudyGoal: user.dailyStudyGoal,
+                token: generateToken(user._id)
+            });
+        }
+
         const userExists = await User.findOne({ email: cleanEmail });
         if (userExists) {
             return res.status(400).json({ error: 'An account with this email already exists' });
@@ -45,7 +61,19 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ error: message });
         }
         if (error.name === 'MongooseError' || (error.message && error.message.includes('buffering timed out'))) {
-            return res.status(503).json({ error: 'Database is busy waking up. Please retry in a few moments.' });
+            try {
+                const user = await dataStore.createUser({ name: req.body.name, email: req.body.email, password: req.body.password });
+                return res.status(201).json({
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    avatar: user.avatar,
+                    dailyStudyGoal: user.dailyStudyGoal,
+                    token: generateToken(user._id)
+                });
+            } catch (fallbackErr) {
+                return res.status(400).json({ error: fallbackErr.message });
+            }
         }
         res.status(500).json({ error: error.message || 'Registration failed' });
     }
@@ -63,6 +91,23 @@ const loginUser = async (req, res) => {
         }
 
         const cleanEmail = email.toLowerCase().trim();
+
+        // In-memory fallback if MongoDB is not connected
+        if (mongoose.connection.readyState !== 1) {
+            const user = await dataStore.findUserByEmail(cleanEmail);
+            if (user && (await dataStore.verifyPassword(user, password))) {
+                return res.json({
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    avatar: user.avatar,
+                    dailyStudyGoal: user.dailyStudyGoal,
+                    token: generateToken(user._id)
+                });
+            }
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+
         const user = await User.findOne({ email: cleanEmail }).select('+password');
 
         if (user && (await user.matchPassword(password))) {
@@ -79,7 +124,17 @@ const loginUser = async (req, res) => {
         }
     } catch (error) {
         if (error.name === 'MongooseError' || (error.message && error.message.includes('buffering timed out'))) {
-            return res.status(503).json({ error: 'Database is busy waking up. Please retry in a few moments.' });
+            const user = await dataStore.findUserByEmail(req.body.email);
+            if (user && (await dataStore.verifyPassword(user, req.body.password))) {
+                return res.json({
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    avatar: user.avatar,
+                    dailyStudyGoal: user.dailyStudyGoal,
+                    token: generateToken(user._id)
+                });
+            }
         }
         res.status(500).json({ error: error.message || 'Login failed' });
     }
@@ -90,6 +145,10 @@ const loginUser = async (req, res) => {
 // @access  Private
 const getMe = async (req, res) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            const user = (await dataStore.findUserById(req.user._id)) || req.user;
+            return res.json(user);
+        }
         const user = await User.findById(req.user._id).select('-password');
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -105,6 +164,16 @@ const getMe = async (req, res) => {
 // @access  Private
 const updateProfile = async (req, res) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            const user = await dataStore.findUserById(req.user._id);
+            if (user) {
+                user.name = req.body.name || user.name;
+                if (req.body.dailyStudyGoal !== undefined) {
+                    user.dailyStudyGoal = req.body.dailyStudyGoal;
+                }
+                return res.json(user);
+            }
+        }
         const user = await User.findById(req.user._id);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });

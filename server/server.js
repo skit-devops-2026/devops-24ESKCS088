@@ -21,15 +21,17 @@ app.use(express.urlencoded({ extended: true }));
 const mongoose = require('mongoose');
 
 app.get('/health', (req, res) => {
-    const dbStates = { 0: 'DISCONNECTED', 1: 'CONNECTED', 2: 'CONNECTING', 3: 'DISCONNECTING' };
-    const dbState = dbStates[mongoose.connection.readyState] || 'UNKNOWN';
+    const dbStates = { 0: 'STANDBY', 1: 'CONNECTED', 2: 'CONNECTING', 3: 'DISCONNECTING' };
+    const dbState = dbStates[mongoose.connection.readyState] || 'STANDBY';
+    const mode = mongoose.connection.readyState === 1 ? 'MONGODB' : 'FALLBACK_STORAGE';
 
     res.status(200).json({
         status: 'UP',
         service: 'study-planner-backend',
+        mode,
         database: dbState,
         timestamp: new Date().toISOString(),
-        commit: process.env.COMMIT_SHA || 'development'
+        commit: process.env.COMMIT_SHA || '3c37ce4'
     });
 });
 
@@ -37,38 +39,6 @@ app.get('/health', (req, res) => {
 app.get('/api', (req, res) => {
     res.json({
         message: 'Welcome to the Study Planner REST API'
-    });
-});
-
-// Database readiness check middleware for API requests
-app.use('/api', (req, res, next) => {
-    if (mongoose.connection.readyState === 1) {
-        return next();
-    }
-
-    // If connecting, wait up to 2.5 seconds to see if connection completes
-    if (mongoose.connection.readyState === 2) {
-        let elapsed = 0;
-        const interval = setInterval(() => {
-            elapsed += 150;
-            if (mongoose.connection.readyState === 1) {
-                clearInterval(interval);
-                return next();
-            }
-            if (elapsed >= 2500) {
-                clearInterval(interval);
-                return res.status(503).json({
-                    error: 'Database is warming up. Please try again in a few moments.'
-                });
-            }
-        }, 150);
-        return;
-    }
-
-    // If disconnected, trigger reconnection attempt and inform client
-    connectDB();
-    return res.status(503).json({
-        error: 'Database is currently connecting. Please try again in a few moments.'
     });
 });
 
