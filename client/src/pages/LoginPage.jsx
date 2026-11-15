@@ -31,7 +31,11 @@ const LoginPage = () => {
             await login(email, password);
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.error || 'Invalid email or password');
+            const errorMsg = err.response?.data?.error || 
+                (err.code === 'ECONNABORTED' 
+                    ? 'Connection timed out. Database may be warming up, please retry.' 
+                    : 'Invalid email or password');
+            setError(errorMsg);
         } finally {
             setLoading(false);
         }

@@ -108,7 +108,7 @@ textarea {
 
 /* Logo */
 
-.logo {
+.sidebar .logo {
     color: white !important;
 
     font-size: 20px;

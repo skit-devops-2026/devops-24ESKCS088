@@ -31,7 +31,8 @@ body {
 
 /* Logo */
 
-.logo {
+.sidebar .logo,
+.sidebar-logo {
     color: white;
 
     font-size: 20px;

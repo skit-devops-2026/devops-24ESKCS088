@@ -205,7 +205,7 @@ textarea {
     gap: 25px;
 }
 
-.logo {
+.topbar-left .logo {
     font-size: 20px;
     font-weight: bold;
     background: linear-gradient(135deg, #4f46e5, #a855f7);

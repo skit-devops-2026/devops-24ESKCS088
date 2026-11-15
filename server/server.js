@@ -18,10 +18,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Health check endpoint (satisfies deployment specification)
+const mongoose = require('mongoose');
+
 app.get('/health', (req, res) => {
+    const dbStates = { 0: 'DISCONNECTED', 1: 'CONNECTED', 2: 'CONNECTING', 3: 'DISCONNECTING' };
+    const dbState = dbStates[mongoose.connection.readyState] || 'UNKNOWN';
+
     res.status(200).json({
         status: 'UP',
         service: 'study-planner-backend',
+        database: dbState,
         timestamp: new Date().toISOString(),
         commit: process.env.COMMIT_SHA || 'development'
     });
@@ -31,6 +37,38 @@ app.get('/health', (req, res) => {
 app.get('/api', (req, res) => {
     res.json({
         message: 'Welcome to the Study Planner REST API'
+    });
+});
+
+// Database readiness check middleware for API requests
+app.use('/api', (req, res, next) => {
+    if (mongoose.connection.readyState === 1) {
+        return next();
+    }
+
+    // If connecting, wait up to 2.5 seconds to see if connection completes
+    if (mongoose.connection.readyState === 2) {
+        let elapsed = 0;
+        const interval = setInterval(() => {
+            elapsed += 150;
+            if (mongoose.connection.readyState === 1) {
+                clearInterval(interval);
+                return next();
+            }
+            if (elapsed >= 2500) {
+                clearInterval(interval);
+                return res.status(503).json({
+                    error: 'Database is warming up. Please try again in a few moments.'
+                });
+            }
+        }, 150);
+        return;
+    }
+
+    // If disconnected, trigger reconnection attempt and inform client
+    connectDB();
+    return res.status(503).json({
+        error: 'Database is currently connecting. Please try again in a few moments.'
     });
 });
 

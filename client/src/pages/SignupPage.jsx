@@ -39,7 +39,11 @@ const SignupPage = () => {
             await register(name, email, password);
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.error || 'Registration failed');
+            const errorMsg = err.response?.data?.error || 
+                (err.code === 'ECONNABORTED' 
+                    ? 'Connection timed out. Database may be warming up, please retry.' 
+                    : 'Registration failed. Please check your details and try again.');
+            setError(errorMsg);
         } finally {
             setLoading(false);
         }

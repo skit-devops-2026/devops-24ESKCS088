@@ -7,8 +7,11 @@ const LandingPage = () => {
         <div className="landing-page-wrapper">
             {/* ================= NAVBAR ================= */}
             <nav>
-                <div className="logo">
-                    📚 StudyPlanner
+                <div 
+                    className="logo landing-navbar-logo" 
+                    style={{ color: '#4f46e5', fontSize: '24px', fontWeight: 'bold' }}
+                >
+                    📚 Study Planner
                 </div>
 
                 <div className="nav-links">
@@ -33,7 +36,7 @@ const LandingPage = () => {
                 <p>
                     StudyPlanner is your personal study companion.
                     Manage your subjects, tasks, exams, notes and
-                    goals in one simple and organized place.
+                    focus sessions in one simple and organized place.
                 </p>
 
                 <div className="hero-buttons">
@@ -53,8 +56,6 @@ const LandingPage = () => {
                     <div className="feature-box">✅ Tasks</div>
                     <div className="feature-box">📅 Calendar</div>
                     <div className="feature-box">📝 Notes</div>
-                    <div className="feature-box">🎯 Goals</div>
-                    <div className="feature-box">📊 Analytics</div>
                     <div className="feature-box">📝 Exams</div>
                     <div className="feature-box">⏱️ Focus Timer</div>
 
@@ -63,8 +64,6 @@ const LandingPage = () => {
                     <div className="feature-box">✅ Tasks</div>
                     <div className="feature-box">📅 Calendar</div>
                     <div className="feature-box">📝 Notes</div>
-                    <div className="feature-box">🎯 Goals</div>
-                    <div className="feature-box">📊 Analytics</div>
                     <div className="feature-box">📝 Exams</div>
                     <div className="feature-box">⏱️ Focus Timer</div>
                 </div>
@@ -103,18 +102,6 @@ const LandingPage = () => {
                     </div>
 
                     <div className="card">
-                        <div className="icon">🎯</div>
-                        <h3>Goals</h3>
-                        <p>Set study goals and track your progress.</p>
-                    </div>
-
-                    <div className="card">
-                        <div className="icon">📊</div>
-                        <h3>Analytics</h3>
-                        <p>Check your study progress using simple charts.</p>
-                    </div>
-
-                    <div className="card">
                         <div className="icon">📝</div>
                         <h3>Exam Tracker</h3>
                         <p>Keep track of upcoming exams and preparation.</p>
@@ -139,7 +126,7 @@ const LandingPage = () => {
                     <div className="step">
                         <div className="number">1</div>
                         <h3>Plan</h3>
-                        <p>Add your subjects, tasks, exams and study goals.</p>
+                        <p>Add your subjects, tasks, exams and study schedule.</p>
                     </div>
 
                     <div className="step">
@@ -161,7 +148,7 @@ const LandingPage = () => {
                 <h2>About StudyPlanner</h2>
                 <p>
                     StudyPlanner is designed to help students organize their academic life in one place.
-                    Instead of using different apps for tasks, notes, exams and goals, students can manage
+                    Instead of using different apps for tasks, notes, exams and focus sessions, students can manage
                     everything from a single dashboard.
                 </p>
             </section>
@@ -179,8 +166,8 @@ const LandingPage = () => {
             <footer>
                 <div className="footer-content">
                     <div>
-                        <h3>📚 StudyPlanner</h3>
-                        <p>Plan your studies, stay organized and achieve your academic goals.</p>
+                        <h3 style={{ color: '#4f46e5' }}>📚 StudyPlanner</h3>
+                        <p>Plan your studies, stay organized and boost your academic performance.</p>
                     </div>
 
                     <div>

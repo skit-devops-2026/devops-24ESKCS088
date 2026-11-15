@@ -12,14 +12,15 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ error: 'Please provide name, email and password' });
         }
 
-        const userExists = await User.findOne({ email: email.toLowerCase().trim() });
+        const cleanEmail = email.toLowerCase().trim();
+        const userExists = await User.findOne({ email: cleanEmail });
         if (userExists) {
-            return res.status(400).json({ error: 'User already exists with this email' });
+            return res.status(400).json({ error: 'An account with this email already exists' });
         }
 
         const user = await User.create({
             name: name.trim(),
-            email: email.toLowerCase().trim(),
+            email: cleanEmail,
             password
         });
 
@@ -36,7 +37,17 @@ const registerUser = async (req, res) => {
             res.status(400).json({ error: 'Invalid user data received' });
         }
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        if (error.code === 11000) {
+            return res.status(400).json({ error: 'An account with this email already exists' });
+        }
+        if (error.name === 'ValidationError') {
+            const message = Object.values(error.errors).map(val => val.message).join(', ');
+            return res.status(400).json({ error: message });
+        }
+        if (error.name === 'MongooseError' || (error.message && error.message.includes('buffering timed out'))) {
+            return res.status(503).json({ error: 'Database is busy waking up. Please retry in a few moments.' });
+        }
+        res.status(500).json({ error: error.message || 'Registration failed' });
     }
 };
 
@@ -51,8 +62,8 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ error: 'Please provide email and password' });
         }
 
-        // Include password since it is set with select: false in schema
-        const user = await User.findOne({ email: email.toLowerCase().trim() }).select('+password');
+        const cleanEmail = email.toLowerCase().trim();
+        const user = await User.findOne({ email: cleanEmail }).select('+password');
 
         if (user && (await user.matchPassword(password))) {
             res.json({
@@ -67,7 +78,10 @@ const loginUser = async (req, res) => {
             res.status(401).json({ error: 'Invalid email or password' });
         }
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        if (error.name === 'MongooseError' || (error.message && error.message.includes('buffering timed out'))) {
+            return res.status(503).json({ error: 'Database is busy waking up. Please retry in a few moments.' });
+        }
+        res.status(500).json({ error: error.message || 'Login failed' });
     }
 };
 

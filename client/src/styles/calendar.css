@@ -47,7 +47,7 @@ button {
     flex-shrink: 0;
 }
 
-.logo {
+.sidebar .logo {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -56,11 +56,11 @@ button {
     margin-bottom: 38px;
 }
 
-.logo span {
+.sidebar .logo span {
     font-size: 25px;
 }
 
-.logo h2 {
+.sidebar .logo h2 {
     font-size: 18px;
     white-space: nowrap;
 }
